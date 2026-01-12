@@ -1,0 +1,17 @@
+/* Add CSS Styling */
+
+
+.one{
+    background-color: black;
+    color: white;
+}
+
+.two{
+    background-color: rgb(228, 214, 18);
+}
+
+.one,
+.two{
+    font-size: 28px;
+    font-family: 'Helvetica', 'Times New Roman', sans-serif;
+}
