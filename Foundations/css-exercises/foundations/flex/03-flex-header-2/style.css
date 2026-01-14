@@ -33,19 +33,14 @@ body {
   font-style: italic;
 }
 
-.left-container{
+.left-container,
+.right-container{
   display:flex;
-  justify-content: space-evenly;
   align-items: center;
   gap: 16px;
 }
 
-.right-container{
-  display:flex;
-  justify-content: space-evenly;
-  align-items: center;
-  gap: 16px;
-}
+
 
 button {
   border: none;

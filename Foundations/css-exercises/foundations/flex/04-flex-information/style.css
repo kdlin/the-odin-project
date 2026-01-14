@@ -10,7 +10,17 @@ img {
 .title {
   font-size: 36px;
   font-weight: 900;
+  text-align: center;
+  margin-bottom: 32px;
 }
+
+.infographics{
+  display:flex;
+  gap: 52px;
+
+}
+
+
 
 /* do not edit this footer */
 .footer {
@@ -22,5 +32,16 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #eee;
+  background: #eee;  
+}
+
+.cards{
+  display:flex;
+  flex-flow: column wrap;
+  gap: 8px;
+  align-items: center;
+
+}
+.text{
+  text-align: center;
 }
