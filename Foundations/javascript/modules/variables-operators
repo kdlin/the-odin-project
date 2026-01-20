@@ -1,0 +1,60 @@
+
+
+let a = 10;
+console.log(a)
+
+a = 25;
+console.log(a)
+
+let b = 7 * a
+console.log(b)
+
+const max = 57;
+const actual = max - 13; 
+const percentage = actual / max;
+console.log(percentage)
+
+// Understand what these 3 variable types mean
+ //let  allows you to reassign variable later
+//example of let
+let test = 15;
+test = 25;
+test = 30; 
+
+//const
+//const cannot be reassigned and throws an error if reassign attempt 
+const pi = 3.14;
+// pi = 3.514;
+// When compiling, will raise error
+
+// Multiple variable declarations in one line'
+let user = 'lelouch', age = 25, country = 'Britannia';
+
+// Best practice is to give each variable a new line 
+let pet_name = 'chester';
+let pet_age = '16';
+let pet_breed = 'sheltie';
+
+
+let ourPlanetName = "earth";
+let currentUserName;
+
+const lotsOfDecimal = 1.85685;
+lotsOfDecimal;
+const twoDecimalPlaces = lotsOfDecimal.toFixed(2);
+console.log(twoDecimalPlaces);
+
+let myNumber = "74";
+myNumber = Number(myNumber) + 3;
+console.log(myNumber);
+
+
+// Increment and Decrement 
+// ++ and -- 
+
+// ++ and -- cannot be applied to a number. Must be a variable
+
+// Let's create a variable to try increment on 
+let num5 = 5;
+num5 ++ ;
+console.log(num5);
