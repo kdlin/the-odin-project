@@ -51,10 +51,28 @@ console.log(myNumber);
 
 // Increment and Decrement 
 // ++ and -- 
-
 // ++ and -- cannot be applied to a number. Must be a variable
+// prefixing vs postfix form;
+
+let counter = 0; 
+console.log(++counter); // returns 1 bc the increment is applied and then return
+// vs
+console.log(counter++); // returns 0 but counter is now 1 
+
+// Increment/decrement has high precedence over most PEMDAS 
+
+
 
 // Let's create a variable to try increment on 
 let num5 = 5;
+console.log(num5); 
 num5 ++ ;
-console.log(num5);
+
+// Difference between == and === 
+// == is of equal value (doesn't need to be same type) 
+// === is of equal vale and same type 
+//example 
+let number = 5;
+console.log(number == "5"); // returns True 
+number === "5"; // returns False 
+number == 8; // False 
