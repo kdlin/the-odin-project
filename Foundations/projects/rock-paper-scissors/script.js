@@ -11,5 +11,27 @@ function getComputerChoice(){
     }
 }
 
+function getPlayerChoice(){
+    let p1_choice = prompt("Enter Rock, Paper, or Scissors: ");
+    return toLowerCase(p1_choice) 
+}
 
-console.log(getComputerChoice())
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice == "rock" && computerChoice == "paper") {
+        console.log("Computer Wins");
+    } else if (humanChoice == "rock" && computerChoice == "scissors") {
+        console.log("You Win!");
+    } else if (humanChoice == "paper" && computerChoice == "scissors") {
+        console.log("Computer Wins")
+    } else if (humanChoice == "paper" && computerChoice == "rock") { 
+        console.log("You win!");
+    } else if (humanChoice == "scissor" && computerChoice == "rock") {
+        console.log("Computer Wins");
+    } else {
+        console.log("You win! ")
+    }
+}
+let humanScore = 0;
+let computerScore = 0;
+
+console.log(playRound(getPlayerChoice(), getComputerChoice()))
