@@ -9,25 +9,25 @@ function getComputerChoice(){
     } else if (choice > 0.33 && choice <= 0.66) {
         return "paper";
     } else {
-        return "scissor";
+        return "scissors";
     }
 }
 
 function getPlayerChoice(){
-    let p1_choice = prompt("Enter Rock, Paper, or Scissor: ");
+    let p1_choice = prompt("Enter Rock, Paper, or scissors: ");
     return p1_choice.toLowerCase()
 }
  
 
 
 function entireGame() {
-    let rounds = 0;
+    let rounds = 1;
     let humanScore = 0;
     let computerScore = 0;
 
-    while (rounds < 5) {
-        console.log(`New round!! Current score Player: ${humanScore} | Computer: ${computerScore}`)
-        playRound(humanChoice(), computerChoice())
+    while (rounds < 6) {
+        console.log(`Round ${rounds} | Current score Player: ${humanScore} | Computer: ${computerScore}`)
+        playRound(getPlayerChoice(), getComputerChoice());
 
         if (humanScore > computerScore) {
         console.log(`Player's score is currently up by ${humanScore-computerScore} | Score: ${humanScore}-${computerScore}`);
@@ -38,6 +38,7 @@ function entireGame() {
       }
 
        rounds += 1;
+       console.log("-----------------------------------");
     }
 
     // Score 
@@ -45,15 +46,15 @@ function entireGame() {
     console.log(`Calculating final score...`);
     setTimeout(() => {
         console.log('...');
+    }, 1000); 
+
+    setTimeout(() => {
+        console.log('...');
     }, 2000); 
 
     setTimeout(() => {
         console.log('...');
-    }, 4000); 
-
-    setTimeout(() => {
-        console.log('...');
-    }, 6000); 
+    }, 3000); 
 
     setTimeout(() => {
         if (humanScore > computerScore) { 
@@ -63,7 +64,7 @@ function entireGame() {
         } else {
             console.log(`It's a Tie. Score: ${humanScore}`);
         }
-    }, 9000);
+    }, 6000);
 
     function playRound(humanChoice, compChoice) {
     if (humanChoice == "rock") {
@@ -89,9 +90,9 @@ function entireGame() {
         }
     }    
 
-    else{ //humanChoice is scissor
-        if (compChoice == "scissor") {
-            console.log("It's a tie. Both selected scissor");
+    else{ //humanChoice is scissorss
+        if (compChoice == "scissors") {
+            console.log("It's a tie. Both selected scissors");
         } else if (compChoice == "rock") {
             console.log("Round goes to Computer. +1 points");
             computerScore += 1;
