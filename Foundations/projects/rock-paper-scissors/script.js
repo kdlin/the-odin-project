@@ -27,7 +27,7 @@ function entireGame() {
 
     while (rounds < 5) {
         console.log(`New round!! Current score Player: ${humanScore} | Computer: ${computerScore}`)
-        playRound(getComputerChoice(), getPlayerChoice())
+        playRound(humanChoice(), computerChoice())
 
         if (humanScore > computerScore) {
         console.log(`Player's score is currently up by ${humanScore-computerScore} | Score: ${humanScore}-${computerScore}`);
@@ -46,14 +46,14 @@ function entireGame() {
     setTimeout(() => {
         console.log('...');
     }, 2000); 
-    
-    setTimeout(() => {
-        console.log('...');
-    }, 2000); 
 
     setTimeout(() => {
         console.log('...');
-    }, 2000); 
+    }, 4000); 
+
+    setTimeout(() => {
+        console.log('...');
+    }, 6000); 
 
     setTimeout(() => {
         if (humanScore > computerScore) { 
@@ -63,7 +63,7 @@ function entireGame() {
         } else {
             console.log(`It's a Tie. Score: ${humanScore}`);
         }
-    }, 4000);
+    }, 9000);
 
     function playRound(humanChoice, compChoice) {
     if (humanChoice == "rock") {
