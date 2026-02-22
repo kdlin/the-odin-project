@@ -7,9 +7,15 @@
  The greeting should read: "Hello! My name is Carlos Stevenson and I am 18 years old."
 */
 
+
 // Add your code right below, good luck!
-
-
+const firstName = 'Lelouch'
+const lastName = 'Vi'
+const thisYear = 2026
+const birthYear = 1999
+const fullName = firstName + " " + lastName
+let age = thisYear - birthYear
+const greeting = `Hello my name is ${fullName} and I am ${age} years old`
 
 
 
