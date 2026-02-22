@@ -1,3 +1,4 @@
+
 function camelize(str) { 
     return str 
         .split('-')
@@ -54,3 +55,43 @@ console.log(sorting);
 
 sort_decreasing(sorting)
 console.log(sorting);
+
+
+function copySorted(arr) { 
+    return [...arr].sort();
+//  return arr.slice().sort(); either way works 
+}
+
+// tests for copySorted
+console.log(`\nTest for copySorted()`)
+let toCopy = ["Lelouch", "Ash", "Suzaku", "The_1975"];
+console.log(copySorted(toCopy));
+
+
+// return array with unique items in arr 
+function unique(arr) { 
+    const unique = new Set();
+    for (let word of arr) { 
+        unique.add(word);
+    }
+    return unique
+}
+
+function long_unique(arr) { 
+    let unique = [];
+
+    for (let word of arr) {
+        if (!unique.includes(word)) {
+            unique.push(word);
+        }
+    }
+
+    return unique
+}
+
+let strings = ['Trip', 'Pikachu', 'Ash', 'Ash',
+     'Pikachu', 'Haxorous', 'Zebstrika'
+    ];
+    
+console.log(long_unique(strings));
+console.log(unique(strings));
