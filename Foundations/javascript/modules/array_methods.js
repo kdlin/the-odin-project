@@ -68,13 +68,21 @@ let toCopy = ["Lelouch", "Ash", "Suzaku", "The_1975"];
 console.log(copySorted(toCopy));
 
 
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+
+        array[j], array[i] = array[i], array[j];
+
+    }
+
+
+
+
 // return array with unique items in arr 
 function unique(arr) { 
-    const unique = new Set();
-    for (let word of arr) { 
-        unique.add(word);
-    }
-    return unique
+    return [...new Set(arr)];
 }
 
 function long_unique(arr) { 
@@ -92,6 +100,7 @@ function long_unique(arr) {
 let strings = ['Trip', 'Pikachu', 'Ash', 'Ash',
      'Pikachu', 'Haxorous', 'Zebstrika'
     ];
-    
+
+console.log("\nUnique Tests")
 console.log(long_unique(strings));
 console.log(unique(strings));
