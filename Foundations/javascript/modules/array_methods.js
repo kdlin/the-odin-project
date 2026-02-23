@@ -76,6 +76,7 @@ function shuffle(array) {
         array[j], array[i] = array[i], array[j];
 
     }
+}
 
 
 
