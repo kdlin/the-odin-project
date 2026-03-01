@@ -19,6 +19,15 @@ function getPlayerChoice(){
 }
  
 
+const selection1 = document.createElement("button");
+const selection2 = document.createElement("button");
+const selection3 = document.createElement("button");
+
+[selection1, selection2, selection3].forEach(button => {
+    button.addEventListener('click', (e) => {
+        let choice = getPlayerChoice();
+    })
+})
 
 function entireGame() {
     let rounds = 1;
