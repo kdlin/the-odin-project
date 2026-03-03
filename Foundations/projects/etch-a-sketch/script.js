@@ -1,3 +1,4 @@
+const MAX_GRID_SIZE = 100;
 // create grid of any size
 function createGrid(size) {
     const totalSquares = size * size; 
@@ -10,9 +11,20 @@ function createGrid(size) {
         const square = document.createElement('div');
         square.classList.add("grid-square");
         square.addEventListener('mouseover', (e) => {
-            square.style.backgroundColor = "black";
-            square.style.color = "black";
+            if (square.style.backgroundColor === "") {
+                const rgb_red = Math.floor(Math.random() * 256);
+                const rgb_green = Math.floor(Math.random() * 256);
+                const rgb_blue = Math.floor(Math.random() * 256);
+
+                square.style.backgroundColor = `rgb(${rgb_red}, ${rgb_green}, ${rgb_blue})`
+            }
+            
+            let curr_opacity = square.style.opacity;
+            if (curr_opacity < 1) {
+                square.style.opacity = Number(curr_opacity) + 0.1;
+            }
         })
+       
         container.appendChild(square);
     }
 }
@@ -31,7 +43,7 @@ resetButton.addEventListener('click', (e) => {
 
         const newSize = parseInt(input);
 
-        if (Number.isInteger(newSize) && newSize > 0 && newSize <= 100) {
+        if (Number.isInteger(newSize) && newSize > 0 && newSize <= MAX_GRID_SIZE) {
             sizeValid = true;
             createGrid(newSize);
         } else {
