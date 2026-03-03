@@ -12,16 +12,16 @@ function createGrid(size) {
         square.classList.add("grid-square");
         square.addEventListener('mouseover', (e) => {
             if (square.style.backgroundColor === "") {
-                const rgb_red = Math.floor(Math.random() * 256);
-                const rgb_green = Math.floor(Math.random() * 256);
-                const rgb_blue = Math.floor(Math.random() * 256);
+                const rgbRed = Math.floor(Math.random() * 256);
+                const rgbGreen = Math.floor(Math.random() * 256);
+                const rgbBlue = Math.floor(Math.random() * 256);
 
-                square.style.backgroundColor = `rgb(${rgb_red}, ${rgb_green}, ${rgb_blue})`
+                square.style.backgroundColor = `rgb(${rgbRed}, ${rgbGreen}, ${rgbBlue})`
             }
             
-            let curr_opacity = square.style.opacity;
-            if (curr_opacity < 1) {
-                square.style.opacity = Number(curr_opacity) + 0.1;
+            let currOpacity = Number(square.style.opacity);
+            if (currOpacity <= 0.95) {
+                square.style.opacity = currOpacity + 0.1;
             }
         })
        
