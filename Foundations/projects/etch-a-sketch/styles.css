@@ -1,12 +1,13 @@
-#container {
-    display: flex;
+#container { 
+    display: flex; 
     flex-wrap: wrap;
-    width: 960px; 
+    width: 960px;
 }
 
+
 .grid-square {
-    width: var(--square-size);
+    width: var(--square-size); 
     height: var(--square-size);
     border: 1px solid black;
-    box-sizing: border-box;
+    
 }
