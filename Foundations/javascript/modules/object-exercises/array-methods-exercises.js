@@ -54,3 +54,23 @@ function getTotalAges(users) {
 console.log("\nTests for ages");
 console.log( `Average age: ${getAverageAge(characters)}`);
 console.log(`Total Ages: ${getTotalAges(characters)}`);
+
+
+// create keyed object from array 
+function groupById(arr) { 
+    return arr
+    .reduce((obj, user) => { 
+        obj[user.id] = user;
+        return obj // return accumulator
+    }, {} ) // initial obj = {} 
+}
+
+let toKey = [
+  {id: 'john', name: "John Smith", age: 20},
+  {id: 'ann', name: "Ann Smith", age: 24},
+  {id: 'pete', name: "Pete Peterson", age: 31},
+];
+
+console.log("\ngroupById tests");
+console.log(groupById(toKey));
+
