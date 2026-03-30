@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:registrar.calpoly.edu)",
+      "WebFetch(domain:catalog.calpoly.edu)",
+      "WebFetch(domain:www.studocu.com)",
+      "WebFetch(domain:www.coursicle.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:support.google.com)",
+      "WebFetch(domain:obsidian-community.github.io)"
+    ]
+  }
+}
