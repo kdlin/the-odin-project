@@ -15,6 +15,20 @@ body {
     min-height: 100vh;
 }
 
+button {
+    background-color: #242424;
+    color: #FAFAFA;
+    margin: 4px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    
+}
+
+button:hover {
+        background-color: #3a3a3a;
+    }
+    
 .calculator { 
     background-color: #1e1e1e;
     display: flex;
@@ -39,12 +53,7 @@ body {
     min-height: 60px;
 }
 
-button {
-    background-color: #242424;
-    color: #FAFAFA;
-    margin: 4px;
-    border-radius: 8px;
-}
+
 
 .digits button {
     padding: 8px;
