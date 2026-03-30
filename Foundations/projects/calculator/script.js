@@ -23,7 +23,7 @@ equal.addEventListener("click", () => {
         return;
     }
     display.textContent = operate(operator, parseFloat(num1), parseFloat(num2));
-
+    resultDisplayed = true;
 })
 
 digits.forEach((btn) => {
@@ -48,28 +48,12 @@ digits.forEach((btn) => {
 operators.forEach((btn) => { 
     btn.addEventListener ("click", () => { 
         if (resultDisplayed === false) { 
-            if (btn.textContent === "+") {
-                operator = "+";
-                display.textContent = num1 + operator + num2;
-            } 
-            else if (btn.textContent === "-") {
-                operator = '-';
-                display.textContent = num1 + operator + num2;
-            }
-            else if (btn.textContent === "/") {
-                operator  = "/";
-                display.textContent = num1 + operator + num2;
-            } else if (btn.textContent === "*") {
-                operator = "*";
-                display.textContent = num1 + operator + num2;
-            }
+            operator = btn.textContent;
+            display.textContent = num1 + operator + num2;
         }
+
     })
 })
-
-
-
-
 
 function add(a, b) { 
     return a + b;
