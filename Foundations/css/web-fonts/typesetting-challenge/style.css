@@ -1,0 +1,74 @@
+/* General setup */
+
+@font-face {
+    font-family: 'Alice';
+    src: url('fonts/Alice-Regular.woff2') format('woff2'),
+        url('fonts/Alice-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Amagro';
+    src: url('fonts/Amagro-bold.woff2') format('woff2'),
+        url('fonts/Amagro-bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+* {
+  box-sizing: border-box;
+  font-family: 'Alice', sans-serif;
+  font-size: 16px;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0 20px;
+  min-width: 980px;
+  max-width: 1400px;
+  line-height: 1.6;
+}
+
+/* Layout */
+ 
+main {
+  display: grid;
+  grid-template-columns: 5fr 2fr 2fr;
+  gap: 40px;
+  padding: 20px 0;
+}
+
+/* header and footer */
+
+header {
+  border-bottom: 5px solid #aa6666;
+  font-family: 'Amagro', sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+h1 { 
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 0px;
+}
+
+section p { 
+    text-indent: 2rem;
+}
+
+footer {
+  border-top: 5px solid #aa6666;
+}
+
+footer p {
+  text-align: center;
+}

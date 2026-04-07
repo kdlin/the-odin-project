@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Alice';
+    src: url('Alice-Regular.woff2') format('woff2'),
+        url('Alice-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Amagro';
+    src: url('Amagro-bold.woff2') format('woff2'),
+        url('Amagro-bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
