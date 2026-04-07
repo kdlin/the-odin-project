@@ -85,7 +85,6 @@ a {
     color: #b63333;
 }
 a:visited { 
-    text-decoration: none;
     color: #aa6666;
 }
 a:hover {
@@ -95,11 +94,12 @@ a:hover {
 
 a:focus {
     text-decoration: none;
+    outline: none;
 }
 
 /* External Link Icons
 /* Select links that start with http or https but NOT your own domain */
-a[href^="http"]:not([href*="file:///C:/Users/Kendrick/Desktop/Repos/the-odin-project/Foundations/css/web-fonts/typesetting-challenge/index.html#"])::after {
+a[href^="http"]::after {
   content: "";
   display: inline-block;
   width: 12px;
@@ -111,4 +111,24 @@ a[href^="http"]:not([href*="file:///C:/Users/Kendrick/Desktop/Repos/the-odin-pro
   background-repeat: no-repeat;
 }
 
+nav ul {
+    padding: 0;
+    margin: 0; 
+}
+nav ul li {
+    padding: 0px;
+    font-family: 'Amagro', sans-serif;
+    font-size: 2rem;
+    list-style-type: none;
+    border: #aa6666 solid; 
+    margin: 16px;
+    text-align: center;   
+}
+
+nav ul li a { 
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
 
