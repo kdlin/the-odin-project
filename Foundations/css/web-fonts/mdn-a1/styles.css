@@ -1,0 +1,32 @@
+/* General setup */
+html {
+  font-size: 10px;
+  margin: 0;
+  font-family: sans-serif
+}
+
+body {
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'OpenSans', sans-serif;
+}
+
+/* Typography */
+
+h1 {
+  font-size: 3.2rem;
+  font-family: 'Playfair', sans-serif;
+}
+
+h2 {
+  font-size: 2.4rem;
+  font-family: 'Playfair',sans-serif; 
+}
+
+p {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  word-spacing: 0.6rem;
+  font-family: 'OpenSans',sans-serif;
+}
