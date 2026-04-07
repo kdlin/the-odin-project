@@ -18,13 +18,15 @@
     font-display: swap;
 }
 
-
-
 * {
   box-sizing: border-box;
-  font-family: 'Alice', sans-serif;
-  font-size: 16px;
 }
+
+
+html {
+    font-size: 16px; 
+}
+
 
 body {
   margin: 0 auto;
@@ -32,10 +34,27 @@ body {
   min-width: 980px;
   max-width: 1400px;
   line-height: 1.6;
+  font-family: 'Alice', sans-serif;
 }
 
+
+h1, h2 { 
+    font-family: 'Amagro', sans-serif;
+}
+
+
+h1 { 
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 0;
+}
+
+
 /* Layout */
- 
 main {
   display: grid;
   grid-template-columns: 5fr 2fr 2fr;
@@ -44,24 +63,13 @@ main {
 }
 
 /* header and footer */
-
 header {
   border-bottom: 5px solid #aa6666;
-  font-family: 'Amagro', sans-serif;
-  display: flex;
-  justify-content: center;
 }
 
-h1 { 
-    font-size: 2.5rem;
-}
 
-h2 {
-    font-size: 2rem;
-    margin-bottom: 0px;
-}
 
-section p { 
+section h2 + p { 
     text-indent: 2rem;
 }
 
@@ -72,3 +80,35 @@ footer {
 footer p {
   text-align: center;
 }
+
+a {
+    color: #b63333;
+}
+a:visited { 
+    text-decoration: none;
+    color: #aa6666;
+}
+a:hover {
+    text-decoration: none; 
+    color: #f38e8e;
+}
+
+a:focus {
+    text-decoration: none;
+}
+
+/* External Link Icons
+/* Select links that start with http or https but NOT your own domain */
+a[href^="http"]:not([href*="file:///C:/Users/Kendrick/Desktop/Repos/the-odin-project/Foundations/css/web-fonts/typesetting-challenge/index.html#"])::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 5px;
+  /* Use a background image (SVG or PNG) for the icon */
+  background-image: url('external-link-52.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+
