@@ -8,7 +8,9 @@
       "WebFetch(domain:www.coursicle.com)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:support.google.com)",
-      "WebFetch(domain:obsidian-community.github.io)"
+      "WebFetch(domain:obsidian-community.github.io)",
+      "WebFetch(domain:www.levels.fyi)",
+      "WebFetch(domain:www.glassdoor.com)"
     ]
   }
 }
