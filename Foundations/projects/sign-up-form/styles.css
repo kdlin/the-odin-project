@@ -1,0 +1,25 @@
+.container {
+  display: flex; 
+  height: 100vh;
+}
+.sidebar {
+  background-image: url('guitar-back.jpg');
+  background-position: center;
+  background-size: cover;
+  width: 45%;
+}
+
+
+.content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+
+}
+
+.header {
+  text-align: center;
+}
+    
+    
