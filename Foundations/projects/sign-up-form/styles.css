@@ -9,6 +9,10 @@
   width: 45%;
 }
 
+.logo-bg img {
+  width: 60px;
+  height: auto;
+}
 
 .content {
   display: flex;
@@ -22,4 +26,18 @@
   text-align: center;
 }
     
-    
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+}
+
+label {
+  display:block;
+  margin-bottom: 5px;
+}
+
+input {
+  border: 1px solid #E5E7EB; 
+  padding: 0.5rem;
+  width: 100%;
+}
