@@ -16,6 +16,9 @@
         <img src="logo.png" alt="logo">
         <span>LinMusic</span>
       </div>
+      <div class="credit">
+        <p>Photo Credit: @Chris44</p>
+      </div>
     </div>
     
     <div class="content">
@@ -24,14 +27,18 @@
       </div> 
       <div class="form">
         <form action="/contact" method="POST">
+          
+          <div class="form-title">
+            <h3>Get Started</h3>
+          </div>
           <div class="field">
             <label for="first_name">First Name</label> 
-            <input type="text" id="first_name" name="user_first" required>
+            <input type="text" placeholder="Ex: Kendrick" id="first_name" name="user_first" required>
           </div>
 
           <div class="field">
             <label for="last_name">Last Name</label>
-            <input type="text" id="last_name" name="user_last" required>
+            <input type="text" id="last_name" placeholder="Ex: Lin" name="user_last" required>
           </div>
 
           <div class="field">
@@ -42,7 +49,14 @@
 
           <div class="field">
             <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" required>
+            <input 
+              type="tel" 
+              id="phone"
+              name="phone"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              placeholder="123-445-9087"
+              required
+              >
           </div>
 
           <div class="field">

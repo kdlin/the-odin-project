@@ -1,17 +1,20 @@
 .container {
   display: flex; 
   height: 100vh;
+  font-family: 'Open Sans';
 }
 .sidebar {
   display: flex; 
   align-items: flex-start;
-  padding-top: 30%;
+  padding-top: 20%;
   background-image: url('guitar-back.jpg');
   background-position: center;
   background-size: cover;
   width: 45%;
-  
+  position: relative;
 }
+
+
 .logo {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 1rem 2rem;
@@ -32,6 +35,13 @@
   font-weight: bold;
 }
 
+.credit {
+  color: white;
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  
+}
 .content {
   display: flex;
   justify-content: center;
@@ -56,19 +66,43 @@ input {
   border: 1px solid #E5E7EB; 
   padding: 0.5rem;
   width: 100%;
+  border-radius: .25rem;
 }
 
+.form-title {
+  grid-column: span 2; 
+}
+
+.form-title h3{
+  margin: 0 0 0 0;
+}
 .form-footer {
   grid-column: span 2;
 }
 
 button {
   padding: 0.5rem;
-  width:100%;
+  width: 50%;
+  border-radius: .4rem; 
+  background-color: #072c27;
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  height: 2.5rem;
 }
 
 .field { 
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+input:user-invalid {
+  border: 2px solid #8d0000; 
+}
+
+input:focus {
+  border: 1.5px solid blue; 
+  box-shadow: 0 0 4px rgba(0, 0, 255, 0.3)
 }
