@@ -19,7 +19,7 @@
   justify-content: center;
   flex-direction: column;
   flex: 1;
-
+  padding: 2rem;
 }
 
 .header {
@@ -29,15 +29,21 @@
 form {
   display: grid;
   grid-template-columns: 1fr 1fr; 
+  gap: 1.5rem 2rem;
 }
 
-label {
-  display:block;
-  margin-bottom: 5px;
-}
+
 
 input {
   border: 1px solid #E5E7EB; 
   padding: 0.5rem;
   width: 100%;
+}
+
+.form-footer{
+  grid-column: span 2;
+}
+
+button {
+  padding: 0.5rem;
 }
