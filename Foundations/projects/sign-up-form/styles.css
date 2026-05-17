@@ -3,15 +3,33 @@
   height: 100vh;
 }
 .sidebar {
+  display: flex; 
+  align-items: flex-start;
+  padding-top: 30%;
   background-image: url('guitar-back.jpg');
   background-position: center;
   background-size: cover;
   width: 45%;
+  
+}
+.logo {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
 }
 
-.logo-bg img {
+.logo img {
   width: 60px;
   height: auto;
+}
+
+.logo span {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .content {
@@ -40,10 +58,17 @@ input {
   width: 100%;
 }
 
-.form-footer{
+.form-footer {
   grid-column: span 2;
 }
 
 button {
   padding: 0.5rem;
+  width:100%;
+}
+
+.field { 
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
