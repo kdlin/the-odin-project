@@ -74,7 +74,7 @@ input {
 }
 
 .form-title h3{
-  margin: 0 0 0 0;
+  margin: 0;
 }
 .form-footer {
   grid-column: span 2;
@@ -103,6 +103,7 @@ input:user-invalid {
 }
 
 input:focus {
-  border: 1.5px solid blue; 
-  box-shadow: 0 0 4px rgba(0, 0, 255, 0.3)
+  border: 1.5px solid rgb(1, 27, 22); 
+  box-shadow: 0 0 4px rgba(0, 0, 255, 0.3);
+  outline: none;
 }
