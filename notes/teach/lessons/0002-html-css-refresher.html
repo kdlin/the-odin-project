@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML + CSS Practical Refresher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/toolbar.css">
+<style>
+  .fdemo { display:flex; gap:6px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:1rem; margin:1rem 0; }
+  .fdemo .box { background:rgba(255,111,94,.12); border:1px solid #ff6f5e; border-radius:8px; padding:.6rem 1rem; font-family:var(--mono); font-size:.78rem; }
+  .bm { background:#2a1f17; border:2px solid #ff6f5e; padding:1rem; margin:1rem 0; border-radius:10px; }
+  .bm .inner { background:rgba(74,222,128,.15); border:2px dashed #4ade80; padding:1rem; font-family:var(--mono); font-size:.78rem; text-align:center; }
+</style>
+</head>
+<body>
+<main class="lesson">
+
+  <p class="eyebrow">Odin CSS Review / Lesson 0 &middot; Foundations</p>
+  <h1>HTML + CSS Practical Refresher</h1>
+  <p class="dek">The load-bearing HTML &amp; CSS you actually reach for daily &mdash; curated, no trivia. Use as a pre-project warm-up and a quick lookup.</p>
+  <p style="font-family:var(--mono);font-size:0.78rem;color:var(--muted);">Total: ~15 min &middot; HTML structure, selectors, cascade, box model, display, units, Flexbox, positioning</p>
+
+  <div class="callout">
+    <span class="label">Scope</span>
+    Everything here is stuff you'll type in real projects. Edge cases and obscure properties are deliberately left out &mdash; look those up when a project needs them. For Grid, see the dedicated Grid Review lesson (use the Lessons button below).
+  </div>
+
+  <!-- ============ HTML ============ -->
+  <h2 class="reveal">1. HTML skeleton <span class="time">&#x23F1; 1 min</span></h2>
+  <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- content --&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  <p class="reveal"><code>&lt;head&gt;</code> = metadata (not visible). <code>&lt;body&gt;</code> = visible content. The <code>viewport</code> meta is what makes mobile scaling work &mdash; always include it.</p>
+
+  <h2 class="reveal">2. Semantic elements (use these, not div-soup) <span class="time">&#x23F1; 1 min</span></h2>
+  <div class="symbol-ref">
+    <div class="sym-title">The structural tags you should default to</div>
+    <code>header</code> <code>nav</code> <code>main</code> <code>section</code> <code>article</code> <code>aside</code> <code>footer</code> &mdash; describe meaning, not just boxes.<br>
+    <code>h1</code>&ndash;<code>h6</code> headings (one <code>h1</code> per page), <code>p</code>, <code>ul/ol/li</code>, <code>a</code>, <code>img</code>, <code>button</code>.
+  </div>
+  <div class="insight">
+    <span class="tag">Why it matters</span>
+    Semantic tags give you accessibility (screen readers), SEO, and readable code for free. Reach for <code>div</code>/<code>span</code> only when no semantic tag fits (generic block / inline wrappers).
+  </div>
+
+  <h2 class="reveal">3. Links, images, lists <span class="time">&#x23F1; 1 min</span></h2>
+  <pre><code>&lt;a href="https://example.com"&gt;text&lt;/a&gt;          &lt;!-- absolute --&gt;
+&lt;a href="about.html"&gt;About&lt;/a&gt;                  &lt;!-- relative --&gt;
+&lt;img src="cat.jpg" alt="a cat"&gt;                 &lt;!-- alt is required --&gt;
+&lt;ul&gt;&lt;li&gt;item&lt;/li&gt;&lt;/ul&gt;                          &lt;!-- unordered --&gt;</code></pre>
+  <div class="trap">
+    <span class="tag">Trap: alt text</span>
+    Always write <code>alt</code> on images &mdash; it's read by screen readers and shows if the image fails. Empty <code>alt=""</code> is correct only for purely decorative images.
+  </div>
+
+  <!-- ============ CSS BASICS ============ -->
+  <h2 class="reveal">4. Selectors <span class="time">&#x23F1; 2 min</span></h2>
+  <pre><code>.class      { }   /* class      - reusable, your default */
+#id         { }   /* id         - unique, avoid for styling */
+element     { }   /* tag        - all of that element */
+.a .b       { }   /* descendant - .b anywhere inside .a */
+.a > .b     { }   /* child      - .b directly inside .a */
+.a, .b      { }   /* group      - both */
+a:hover     { }   /* pseudo-class - state */
+li::before  { }   /* pseudo-element - generated content */</code></pre>
+  <div class="insight">
+    <span class="tag">Practical default</span>
+    Style with <strong>classes</strong>. Reserve <code>id</code> for JS hooks / anchors, not styling (too specific, not reusable).
+  </div>
+
+  <h2 class="reveal">5. The cascade: specificity &amp; inheritance <span class="time">&#x23F1; 2 min</span></h2>
+  <p class="reveal">When rules conflict, the winner is decided by <strong>specificity</strong>, then source order (last wins on a tie).</p>
+  <div class="symbol-ref">
+    <div class="sym-title">Specificity, high to low</div>
+    inline style <code>&gt;</code> <code>#id</code> <code>&gt;</code> <code>.class</code> / <code>:pseudo-class</code> / <code>[attr]</code> <code>&gt;</code> <code>element</code> / <code>::pseudo-element</code><br>
+    <code>!important</code> overrides all of the above (avoid it &mdash; it's a smell).
+  </div>
+  <div class="trap">
+    <span class="tag">Trap: fighting specificity</span>
+    If a style "won't apply," something more specific is winning. Don't pile on <code>!important</code> &mdash; lower the other selector's specificity or raise yours with a class. Inheritance: some properties (color, font) pass to children automatically; layout ones (margin, padding, border) do not.
+  </div>
+
+  <h2 class="reveal">6. The box model <span class="time">&#x23F1; 2 min</span></h2>
+  <p class="reveal">Every element is boxes nested outward: <strong>content &rarr; padding &rarr; border &rarr; margin</strong>.</p>
+  <div class="bm">margin (outside, space between elements)
+    <div class="inner">content + padding (inside) + border</div>
+  </div>
+  <pre><code>* { box-sizing: border-box; }   /* set this globally, always */</code></pre>
+  <div class="insight">
+    <span class="tag">Key Insight: border-box</span>
+    By default (<code>content-box</code>), <code>width</code> = content only, so padding/border make the element <em>bigger</em> than the number you set. <code>border-box</code> makes <code>width</code> include padding + border &mdash; what you set is what you get. Set it on <code>*</code> at the top of every stylesheet.
+  </div>
+  <p class="reveal"><code>padding</code> = space inside the border. <code>margin</code> = space outside it. Vertical margins between block elements <strong>collapse</strong> (the larger wins, they don't add).</p>
+
+  <h2 class="reveal">7. display: block vs inline vs inline-block <span class="time">&#x23F1; 1 min</span></h2>
+  <div class="op-grid">
+    <div class="op-card"><strong>block</strong><br>Full width, new line. Respects width/height + all margins. (div, p, section, h1)</div>
+    <div class="op-card"><strong>inline</strong><br>Flows in text, only as wide as content. Ignores width/height + vertical margins. (span, a, strong)</div>
+    <div class="op-card"><strong>inline-block</strong><br>Flows inline BUT respects width/height + margins. Best of both.</div>
+  </div>
+  <p class="reveal">And the two big layout displays: <code>flex</code> (1D) and <code>grid</code> (2D) &mdash; covered below and in the Grid lesson.</p>
+
+  <h2 class="reveal">8. Units <span class="time">&#x23F1; 1 min</span></h2>
+  <div class="symbol-ref">
+    <div class="sym-title">Which unit, when</div>
+    <code>px</code> &mdash; fixed, absolute. Borders, small fixed sizes.<br>
+    <code>rem</code> &mdash; relative to root font-size. <strong>Default for font-size + spacing</strong> (predictable, accessible).<br>
+    <code>em</code> &mdash; relative to the element's own font-size. Padding that should scale with text. Compounds when nested.<br>
+    <code>%</code> &mdash; relative to the parent's dimension.<br>
+    <code>fr</code> &mdash; grid only; a share of leftover space.
+  </div>
+
+  <!-- ============ LAYOUT ============ -->
+  <h2 class="reveal">9. Flexbox (your 1D daily driver) <span class="time">&#x23F1; 2 min</span></h2>
+  <pre><code>.container {
+  display: flex;
+  flex-direction: row;          /* or column */
+  justify-content: center;      /* MAIN axis alignment */
+  align-items: center;          /* CROSS axis alignment */
+  gap: 1rem;
+  flex-wrap: wrap;              /* let items wrap to next line */
+}
+.item { flex: 1; }              /* grow to share space equally */</code></pre>
+  <div class="fdemo">
+    <div class="box">justify-content</div><div class="box">+ align-items</div><div class="box">= centered</div>
+  </div>
+  <div class="insight">
+    <span class="tag">The mental model</span>
+    Pick a direction (row/column) = the <strong>main axis</strong>. <code>justify-content</code> aligns along main; <code>align-items</code> aligns across it (cross axis). Flip <code>flex-direction</code> and those two swap which way they push. Centering anything = <code>display:flex; justify-content:center; align-items:center</code>.
+  </div>
+  <div class="trap">
+    <span class="tag">Flex vs Grid</span>
+    Flexbox = content-first, ONE dimension (a row or a column). Grid = layout-first, TWO dimensions. Real pages use both: Grid for the page skeleton, Flexbox inside the pieces.
+  </div>
+
+  <h2 class="reveal">10. Positioning <span class="time">&#x23F1; 2 min</span></h2>
+  <div class="symbol-ref">
+    <div class="sym-title">position values</div>
+    <code>static</code> &mdash; default, normal flow.<br>
+    <code>relative</code> &mdash; nudge from its normal spot with top/left; keeps its space. Also = anchor for absolute children.<br>
+    <code>absolute</code> &mdash; removed from flow, positioned against nearest <em>positioned</em> ancestor.<br>
+    <code>fixed</code> &mdash; pinned to the viewport, stays on scroll.<br>
+    <code>sticky</code> &mdash; normal until it hits a scroll threshold, then sticks.
+  </div>
+  <div class="insight">
+    <span class="tag">The one pattern to remember</span>
+    To place a child precisely inside a parent: give the <strong>parent</strong> <code>position: relative</code> and the <strong>child</strong> <code>position: absolute</code>. Absolute always anchors to the nearest positioned ancestor &mdash; without <code>relative</code> on the parent it escapes to the whole page.
+  </div>
+
+  <h2 class="reveal">11. Practical odds &amp; ends <span class="time">&#x23F1; 1 min</span></h2>
+  <ul class="reveal">
+    <li><strong>Colors:</strong> <code>#rrggbb</code>, <code>rgb()</code>, <code>hsl()</code> (hsl is easiest to reason about: hue/sat/light).</li>
+    <li><strong>Centering a block horizontally:</strong> <code>margin: 0 auto</code> (with a set width). Centering anything: flex/grid.</li>
+    <li><strong>Reset:</strong> start sheets with <code>* { margin:0; padding:0; box-sizing:border-box; }</code>.</li>
+    <li><strong>Fonts:</strong> <code>font-family</code> with fallbacks (<code>system-ui, sans-serif</code>); size in <code>rem</code>; <code>line-height: 1.5</code>ish for body text.</li>
+    <li><strong>Overflow:</strong> <code>overflow: auto/hidden/scroll</code> controls content that exceeds its box.</li>
+  </ul>
+
+  <div class="quiz">
+    <h3>Retrieval Quiz</h3>
+
+    <p class="quiz-q">1. Why set <code>box-sizing: border-box</code>?</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q1',this,0,0)"><span class="radio"></span> width includes pad+border</li>
+      <li onclick="reveal('q1',this,1,0)"><span class="radio"></span> it removes all margins</li>
+      <li onclick="reveal('q1',this,2,0)"><span class="radio"></span> it centers the element</li>
+      <li onclick="reveal('q1',this,3,0)"><span class="radio"></span> it enables flexbox use</li>
+    </ul>
+    <div class="quiz-answer" id="q1"><strong>Correct.</strong> With border-box, the width you set includes padding + border, so the box doesn't balloon past your number.</div>
+
+    <p class="quiz-q">2. Which has the highest specificity?</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q2',this,0,1)"><span class="radio"></span> an id selector</li>
+      <li onclick="reveal('q2',this,1,1)"><span class="radio"></span> a class selector</li>
+      <li onclick="reveal('q2',this,2,1)"><span class="radio"></span> an element selector</li>
+      <li onclick="reveal('q2',this,3,1)"><span class="radio"></span> a pseudo-element</li>
+    </ul>
+    <div class="quiz-answer" id="q2"><strong>Correct.</strong> id &gt; class/pseudo-class/attribute &gt; element. Inline beats id; !important beats all (avoid it).</div>
+
+    <p class="quiz-q">3. inline-block differs from inline because it...</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q3',this,0,2)"><span class="radio"></span> respects width and height</li>
+      <li onclick="reveal('q3',this,1,2)"><span class="radio"></span> always starts a new line</li>
+      <li onclick="reveal('q3',this,2,2)"><span class="radio"></span> cannot have any padding</li>
+      <li onclick="reveal('q3',this,3,2)"><span class="radio"></span> hides itself by default</li>
+    </ul>
+    <div class="quiz-answer" id="q3"><strong>Correct.</strong> inline-block flows inline but respects width/height/margins, which plain inline ignores.</div>
+
+    <p class="quiz-q">4. In Flexbox, justify-content aligns along the...</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q4',this,0,3)"><span class="radio"></span> main axis direction</li>
+      <li onclick="reveal('q4',this,1,3)"><span class="radio"></span> cross axis direction</li>
+      <li onclick="reveal('q4',this,2,3)"><span class="radio"></span> diagonal of the box</li>
+      <li onclick="reveal('q4',this,3,3)"><span class="radio"></span> the page scroll axis</li>
+    </ul>
+    <div class="quiz-answer" id="q4"><strong>Correct.</strong> justify-content = main axis; align-items = cross axis. Flipping flex-direction swaps which is which.</div>
+
+    <p class="quiz-q">5. For absolute positioning to anchor to a parent, the parent needs...</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q5',this,0,4)"><span class="radio"></span> position: relative</li>
+      <li onclick="reveal('q5',this,1,4)"><span class="radio"></span> display: block set</li>
+      <li onclick="reveal('q5',this,2,4)"><span class="radio"></span> a fixed pixel width</li>
+      <li onclick="reveal('q5',this,3,4)"><span class="radio"></span> overflow set hidden</li>
+    </ul>
+    <div class="quiz-answer" id="q5"><strong>Correct.</strong> Absolute anchors to the nearest <em>positioned</em> ancestor; give the parent position: relative.</div>
+
+    <p class="quiz-q">6. Best default unit for font-size and spacing?</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q6',this,0,5)"><span class="radio"></span> rem, root-relative</li>
+      <li onclick="reveal('q6',this,1,5)"><span class="radio"></span> px, fixed always</li>
+      <li onclick="reveal('q6',this,2,5)"><span class="radio"></span> em, parent-relative</li>
+      <li onclick="reveal('q6',this,3,5)"><span class="radio"></span> percent of screen</li>
+    </ul>
+    <div class="quiz-answer" id="q6"><strong>Correct.</strong> rem is root-relative: predictable, no compounding, scales with the user's accessibility font setting.</div>
+  </div>
+
+  <div class="source">
+    <span class="label">Primary source</span>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN CSS reference</a> for lookups, and <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">CSS-Tricks Flexbox guide</a> &mdash; bookmark both.
+  </div>
+
+  <div class="ask">
+    <span class="label">I'm your teacher &mdash; ask me</span>
+    Want a deeper drill on any one section (cascade, flexbox, positioning)? Ask and I'll build a focused mini-lesson with exercises.
+  </div>
+
+  <footer class="nav">
+    <span>Odin CSS Review &middot; Foundations</span>
+    <span>Next &rarr; CSS Grid Review</span>
+  </footer>
+
+</main>
+
+<script src="../assets/lesson.js"></script>
+<script src="../assets/glossary.js"></script>
+<script src="../assets/course.js"></script>
+<script src="../assets/toolbar.js"></script>
+<script src="../assets/quiz.js"></script>
+<script>
+  var correctAnswers = [0, 0, 0, 0, 0, 0];
+</script>
+</body>
+</html>
