@@ -22,7 +22,7 @@
   background-color: #393f4d;
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 2fr;
   align-items: center;
 }
 
@@ -35,7 +35,7 @@
   grid-template-columns: repeat(4, auto);
   list-style: none;
   justify-content: center;
-  gap: 8rem;
+  gap: 12rem;
 }
 
 .menu li {
@@ -109,7 +109,7 @@
   background-color: #FFFFFF;
   color: black;
   text-align: center;
-  height: 200px; ;
+  height: 200px; 
 }
 
 .card p {
