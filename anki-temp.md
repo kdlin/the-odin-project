@@ -86,3 +86,105 @@ Basic
 Why use gap instead of margin for spacing grid/flex items?
 Back: **gap** spaces only **between** tracks -- no waste on outer edges, one value. **margin** adds space on all four sides, so gutters double (15+15) and bleed onto container edges. Rule: use `gap` for spacing items inside a grid/flex; reserve `margin` for spacing from things outside the container.
 END
+
+
+## CSS Grid -- Advanced Grid Properties
+
+###### repeat() function
+START
+Basic
+How do you create several same-size grid tracks without typing each one?
+Back: `repeat(count, size)`. Size can be any track value (fr, px, %, minmax).
+```css
+grid-template-columns: repeat(5, 1fr);
+grid-template-columns: repeat(2, 2fr) repeat(3, 1fr);
+```
+END
+
+
+###### fr unit vs auto
+START
+Basic
+What is the difference between the fr unit and auto for sizing a grid track?
+Back: **fr** distributes the **leftover** space by ratio (1fr = one share of what remains). **auto** sizes the track to its **content**. Different jobs: `200px auto 1fr` -- auto hugs content, 1fr soaks up the rest.
+END
+
+
+###### min() max() clamp() minmax()
+START
+Basic
+Compare min(), max(), clamp(), and minmax().
+Back: **min(a,b...)** returns the smallest; **max(a,b...)** the largest (both global). **clamp(min, ideal, max)** -- global, sits at ideal, clamps at the bounds, works on any property. **minmax(min, max)** -- grid-only, a track flexes between bounds (no ideal point).
+END
+
+
+###### auto-fit vs auto-fill
+START
+Basic
+What is the difference between auto-fit and auto-fill in repeat()?
+Back: Identical when the grid is full. With **fewer items than fit**: **auto-fit** collapses empty tracks so items **stretch to fill** the row (items FIT the space). **auto-fill** keeps empty ghost tracks so items **stay their size** (row FILLed with empties). Mnemonic: FIT = items fit/stretch, FILL = row filled with ghosts. Live demo: https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/
+END
+
+
+###### auto vs auto-fit/auto-fill (slot)
+START
+Basic
+In repeat(), what is the difference between auto and auto-fit/auto-fill?
+Back: **auto** is a **size** value (track sizes to content). **auto-fit / auto-fill** are **count** values -- they go in the count slot and let the browser compute how many tracks fit. `repeat(4, auto)` = 4 content-sized tracks; `repeat(auto-fit, minmax(250px, 1fr))` = as many >=250px tracks as fit.
+END
+
+
+###### Responsive grid one-liner
+START
+Basic
+What is the standard one-line responsive grid, and how does the browser compute it?
+Back: `repeat(auto-fit, minmax(250px, 1fr))`. The browser counts how many columns fit using the **min** (250px = most columns), then grows each up to the **max** (1fr = share leftover space equally). No media queries needed.
+END
+
+
+###### grid-auto-rows
+START
+Basic
+How do you size rows when the row count is dynamic (e.g. auto-fit cards)?
+Back: You can't use `grid-template-rows` (that's for a known count). Use `grid-auto-rows: 200px` to size every implicitly-created row, or set height directly on the item.
+END
+
+
+###### Explicit vs implicit grid
+START
+Basic
+What is the difference between the explicit and implicit grid?
+Back: **Explicit** = tracks you define with `grid-template-*`. **Implicit** = tracks the browser auto-creates when items need a row/column you didn't define. Referencing a line (e.g. `grid-row: 2 / 4`) creates the implicit tracks to satisfy it -- no need to pre-declare row count. Size implicit tracks with `grid-auto-rows/columns`.
+END
+
+
+###### Grid rows are global across columns
+START
+Basic
+Can different columns in one grid have different numbers of rows?
+Back: No. A row line cuts across ALL columns -- rows are global. The column with the most stacked items sets the row count; quieter columns span to match (e.g. a sidebar using `grid-row: 2 / 4` to cover two rows the other column split into).
+END
+
+
+###### Grid alignment: items vs content
+START
+Basic
+What is the difference between justify-items/align-items and justify-content/align-content?
+Back: **justify-items / align-items** align each item **inside its own cell** (per-item: justify-self / align-self). **justify-content / align-content** align the whole group of **tracks inside the container** -- only has effect when tracks don't fill it (e.g. `auto` columns, not `1fr`). justify- = horizontal, align- = vertical.
+END
+
+
+###### align-items: stretch vs center
+START
+Basic
+Why does align-items: center stop a grid item from filling its cell?
+Back: Default `stretch` makes the item grow to fill its cell's full height (the "auto-growing"). `center` instead sizes the item to its **content** and centers it in the cell -- so it stops filling, even if the cell/row is tall. Want fill = stretch; want centered = center. It shrinks the ITEM, not the cell.
+END
+
+
+###### text-align vs justify-self
+START
+Basic
+When aligning a logo in a grid cell, use text-align or justify-self?
+Back: **justify-self** -- it aligns the whole grid item box within its cell regardless of content type (text, img, component). **text-align** only aligns inline content inside the box and is unreliable for a non-text logo. Use justify-self (+ align-self) for a real logo/image.
+END

@@ -5,6 +5,6 @@ convert to HTML in the right notes page, commit as you, then clear this file.
 
 ---
 
-## Advanced Grid Properties
+## Using Flexbox and Grid
 
 <!-- write your takeaways below -->
