@@ -16,7 +16,10 @@
   .gdemo .cell { background:rgba(255,111,94,.12); border:1px solid #ff6f5e; border-radius:8px; padding:1rem; font-family:var(--mono); font-size:.8rem; text-align:center; }
   .lines { font-family:var(--mono); font-size:.78rem; color:var(--muted); }
   .grid-3 { grid-template-columns: repeat(3, 1fr); }
-  .af { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+  .af { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        resize: horizontal; overflow: auto; min-width: 140px; max-width: 100%; }
+  .af::after { content:"\2194 drag this corner \2192"; display:block; grid-column:1/-1;
+        font-family:var(--mono); font-size:.7rem; color:var(--muted); text-align:right; }
 </style>
 </head>
 <body>
@@ -101,7 +104,7 @@ grid-column: 1 / span 2;  /* start at 1, cover 2 tracks */</code></pre>
 
   <h2 class="reveal">5. The responsive one-liner: auto-fit / auto-fill <span class="time">&#x23F1; 2 min</span></h2>
   <pre><code>grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));</code></pre>
-  <p class="reveal">"As many &ge;250px columns as fit, each growing to share leftover space." Browser counts using the <strong>min</strong>, then grows each to the <strong>max</strong>. No media queries. Live demo below (resize the window):</p>
+  <p class="reveal">"As many &ge;250px columns as fit, each growing to share leftover space." Browser counts using the <strong>min</strong>, then grows each to the <strong>max</strong>. No media queries. Live demo below &mdash; <strong>drag the bottom-right corner</strong> to resize and watch the column count change:</p>
   <div class="gdemo af">
     <div class="cell">card</div><div class="cell">card</div><div class="cell">card</div>
     <div class="cell">card</div><div class="cell">card</div><div class="cell">card</div>
