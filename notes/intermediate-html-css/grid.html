@@ -15,7 +15,68 @@
 
       <!-- Section notes get added here as Kendrick summarizes each lesson. -->
       <h2>Positioning Grid Elements</h2>
-      <!-- KENDRICK'S SUMMARY GOES HERE -->
+
+      <h3>Vocabulary: track vs line vs cell</h3>
+      <ul>
+        <li><strong>Track</strong> -- one full row or column (the strip between two adjacent lines). You <em>define</em> tracks with <code>grid-template-rows/columns</code>.</li>
+        <li><strong>Line</strong> -- the dividers between/around tracks. Created <em>implicitly</em> when tracks are defined; numbered from 1. You <em>position items on lines</em>.</li>
+        <li><strong>Cell</strong> -- one row track crossing one column track. The smallest unit.</li>
+      </ul>
+      <p>Key insight: a grid with N tracks on an axis has N+1 lines. A 3x3 grid has 4 lines per axis.</p>
+
+      <h3>The big mental model: you place items on LINES, not cells</h3>
+      <p>An item's placement is "start on this line, end on that line" -- it fills whatever cells live between. Spanning falls out for free: widen the gap between start and end lines.</p>
+      <pre><code>/* cell B = 2nd column: start line 2, end line 3 */
+grid-column: 2 / 3;
+/* span B + C: just move the end line out */
+grid-column: 2 / 4;</code></pre>
+      <div class="tip"><strong>Gotcha:</strong> lines start at 1, not 0. There is no line 0. Use <code>-1</code> for "the last line" (great for full-width spans). Also start == end gives zero span.</div>
+
+      <h3>Positioning properties</h3>
+      <ul>
+        <li><code>grid-column-start/end</code>, <code>grid-row-start/end</code> -- the longhands; values are line numbers.</li>
+        <li><code>grid-column</code> / <code>grid-row</code> -- shorthand: <code>start / end</code>.</li>
+        <li><code>grid-area</code> -- combines all four: <code>row-start / col-start / row-end / col-end</code> (both starts first, then both ends).</li>
+        <li><code>span</code> keyword -- instead of an end line, say how many tracks to cover: <code>grid-column: 1 / span 2</code> covers 2 columns starting at line 1. The count is inclusive (span 2 = two tracks total).</li>
+      </ul>
+
+      <h3>grid-area has TWO jobs</h3>
+      <ol>
+        <li><strong>Line shorthand:</strong> <code>grid-area: 1 / 1 / 3 / 6;</code> -- numbers pointing at lines.</li>
+        <li><strong>A name:</strong> <code>grid-area: living-room;</code> -- assigns a name tag, only works paired with the container's <code>grid-template-areas</code> map.</li>
+      </ol>
+
+      <h3>Named areas: grid-template-areas (3-step recipe)</h3>
+      <pre><code>.container {
+  /* 1. SIZE the tracks */
+  grid-template-rows: 100px 100px 500px 100px;
+  grid-template-columns: 340px 1020px;
+  gap: 15px;
+  /* 2. MAP the layout with names */
+  grid-template-areas:
+    "header  header"
+    "sidebar nav"
+    "sidebar article"
+    "footer  footer";
+}
+/* 3. CLAIM the names on each item */
+.header  { grid-area: header; }
+.sidebar { grid-area: sidebar; }</code></pre>
+      <ul>
+        <li>Each quoted string = one row; each word = which item fills that cell.</li>
+        <li><strong>Spanning = repeating the name:</strong> same word across a row spans columns; same word down rows spans rows.</li>
+        <li><code>.</code> marks an empty cell.</li>
+      </ul>
+      <div class="tip"><strong>Hard rule:</strong> a spanned area must form a solid rectangle. L-shapes/gaps make the whole <code>grid-template-areas</code> invalid (silently ignored).</div>
+
+      <h3>gap vs margin</h3>
+      <p><code>gap</code> spaces <em>between</em> tracks only -- no waste on outer edges. <code>margin</code> adds space on all four sides of each item, so gutters double (15+15) and bleed onto edges. Inside grid/flex: use <code>gap</code> for spacing items, reserve <code>margin</code> for spacing from things outside the container.</p>
+
+      <h3>display: grid vs inline-grid</h3>
+      <p>Inside behaves identically. Difference is the container itself: <code>grid</code> = block-level (full width, new line); <code>inline-grid</code> = inline-level (sits in text flow, only as wide as needed).</p>
+
+      <h3>px vs fr (preview)</h3>
+      <p><code>px</code> = static, exact size, does NOT stretch to fill. <code>fr</code> = a fraction of leftover space, splits remaining room by ratio and resizes with the container. <code>1fr 3fr</code> fills the width 1:3; <code>1px 3px</code> = two tiny slivers.</p>
     </main>
   </body>
 </html>
