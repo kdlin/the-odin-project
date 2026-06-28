@@ -7,6 +7,11 @@ html {
 .container {
   display: grid; 
   grid-template: 100px 100px 500px 100px / 340px 1020px;
+  grid-template-areas: 
+    "header header" 
+    "sidebar nav" 
+    "sidebar article" 
+    "footer footer"; 
   gap: 15px;
 }
 
@@ -21,28 +26,29 @@ html {
 
 .header {
   background-color: #006157;
-  grid-area: 1 / 1 / 2 / -1;
+  grid-area: header;
 }
 
 .sidebar {
   background-color: #005B94;
-  grid-area: 2 / 1 / 4  / 2;
+  grid-area: sidebar;
 }
 
 .nav {
   background-color: #642cde;
-  grid-area: 2/ 2 / 3 / 3;
+  grid-area: nav;
 }
 
 .article {
   background-color: #7E1DC3;
-  grid-area: 3 / 2 / 4 / 3;
+  grid-area: article;
 }
 
 .footer {
   background-color: #393f4d;
-  grid-area: 4 / 1 / 5 / -1;
+  grid-area: footer;
 }
+
 
 .article p {
   font-size: 18px;
