@@ -5,10 +5,9 @@ html {
 }
 
 .container {
-  text-align: center;
-  height: 100%;
-  padding: 16px;
-  box-sizing: border-box;
+  display: grid; 
+  grid-template: 100px 100px 500px 100px / 340px 1020px;
+  gap: 15px;
 }
 
 .container div {
@@ -22,10 +21,12 @@ html {
 
 .header {
   background-color: #006157;
+  grid-area: 1 / 1 / 2 / 3;
 }
 
 .sidebar {
   background-color: #005B94;
+  grid-area: 2 / 1 / 4  / 2
 }
 
 .nav {
@@ -34,10 +35,12 @@ html {
 
 .article {
   background-color: #7E1DC3;
+  grid-area: 3 / 2 / 4 / 3;
 }
 
 .footer {
   background-color: #393f4d;
+  grid-area: 4 / 1 / 5 / 3;
 }
 
 .article p {
