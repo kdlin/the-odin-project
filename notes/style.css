@@ -1,0 +1,126 @@
+/* notes/style.css -- shared styling for the personal Odin notes site */
+
+:root {
+  --bg: #1a1a1a;
+  --surface: #242424;
+  --text: #e8e8e8;
+  --muted: #9a9a9a;
+  --accent: #7cc4ff;
+  --border: #383838;
+  --code-bg: #2d2d2d;
+  --max-width: 760px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.65;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 6rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+h2 {
+  margin-top: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.35rem;
+}
+
+h3 {
+  margin-top: 1.75rem;
+  color: var(--accent);
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-top: 0;
+}
+
+code {
+  background: var(--code-bg);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+pre {
+  background: var(--code-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: var(--muted);
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+}
+
+.toc-list li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.toc-list a {
+  display: block;
+  padding: 1rem 1.25rem;
+}
+
+.toc-list .topic {
+  font-weight: 600;
+}
+
+.toc-list .desc {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.tip {
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin: 1.25rem 0;
+}
+
+.tip strong {
+  color: var(--accent);
+}
