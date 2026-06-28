@@ -5,6 +5,9 @@
 
 .container {
   text-align: center;
+  display: grid;
+  gap: 4px;
+  grid-template-columns: 1fr 4fr;
 }
 
 .container div {
@@ -17,6 +20,7 @@
 
 .header {
   background-color: #393f4d;
+  grid-column: 1 / -1;
 }
 
 .menu ul,
@@ -26,6 +30,9 @@
 
 .sidebar {
   background-color: #C50208;
+  grid-column: 1 / 2; 
+  grid-row: 2 / 4; 
+  gap: 50px;
 }
 
 .sidebar .photo {
@@ -46,6 +53,8 @@
 
 .nav {
   background-color: #C50208;
+  grid-column: 2 / -1;
+  grid-row: 2 / 3;
 }
 
 .nav ul li {
@@ -55,6 +64,10 @@
 
 .article {
   background-color: #bccbde;
+  grid-column: 2 / -1; 
+  grid-row: 3 / 4; 
+  display: grid; 
+  gap: 15px; /* For cards inside of article */
 }
 
 .article p {
@@ -83,6 +96,7 @@
 
 .footer {
   background-color: #393f4d;
+  grid-column: 1 / -1;  /*spans full cols*/
 }
 
 .footer p {
