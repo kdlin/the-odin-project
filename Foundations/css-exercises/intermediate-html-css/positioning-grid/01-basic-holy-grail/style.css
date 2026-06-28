@@ -21,16 +21,17 @@ html {
 
 .header {
   background-color: #006157;
-  grid-area: 1 / 1 / 2 / 3;
+  grid-area: 1 / 1 / 2 / -1;
 }
 
 .sidebar {
   background-color: #005B94;
-  grid-area: 2 / 1 / 4  / 2
+  grid-area: 2 / 1 / 4  / 2;
 }
 
 .nav {
   background-color: #642cde;
+  grid-area: 2/ 2 / 3 / 3;
 }
 
 .article {
@@ -40,7 +41,7 @@ html {
 
 .footer {
   background-color: #393f4d;
-  grid-area: 4 / 1 / 5 / 3;
+  grid-area: 4 / 1 / 5 / -1;
 }
 
 .article p {
