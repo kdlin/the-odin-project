@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS Grid Review (Day 1)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/toolbar.css">
+<style>
+  /* Lesson-specific demos only. */
+  .gdemo { display:grid; gap:6px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:1rem; margin:1.25rem 0; }
+  .gdemo .cell { background:rgba(255,111,94,.12); border:1px solid #ff6f5e; border-radius:8px; padding:1rem; font-family:var(--mono); font-size:.8rem; text-align:center; }
+  .lines { font-family:var(--mono); font-size:.78rem; color:var(--muted); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .af { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+</style>
+</head>
+<body>
+<main class="lesson">
+
+  <p class="eyebrow">Odin CSS Review / Lesson 1 &middot; CSS Grid</p>
+  <h1>CSS Grid Review &mdash; Day 1</h1>
+  <p class="dek">Everything from today's three Grid lessons, compressed for a next-day retrieval pass. Read the boxes, then do the quiz from memory.</p>
+  <p style="font-family:var(--mono);font-size:0.78rem;color:var(--muted);">Total: ~10 min &middot; covers Positioning, Advanced Properties, Grid vs Flexbox</p>
+
+  <div class="callout">
+    <span class="label">How To Use This</span>
+    Don't just re-read. Skim a section, then cover it and try to answer the quiz at the bottom from memory. Retrieval (not re-reading) is what moves this into long-term storage. Hit the <strong>Reference</strong> button in the bottom bar to look up any term.
+  </div>
+
+  <h2 class="reveal">1. Vocabulary: the foundation <span class="time">&#x23F1; 1 min</span></h2>
+  <div class="symbol-ref">
+    <div class="sym-title">The three units of a grid</div>
+    <code>track</code> &mdash; one full row or column (strip between two lines). <strong>You define tracks.</strong><br>
+    <code>line</code> &mdash; the dividers, numbered from 1, created implicitly. <strong>You position items on lines.</strong><br>
+    <code>cell</code> &mdash; one row track crossing one column track. The smallest unit.
+  </div>
+  <div class="insight">
+    <span class="tag">Key Insight</span>
+    A grid with N tracks on an axis has <strong>N+1 lines</strong>. You define tracks; the lines appear for free; items occupy cells (or spans of them).
+  </div>
+
+  <h2 class="reveal">2. Positioning: on lines, not cells <span class="time">&#x23F1; 2 min</span></h2>
+  <p class="reveal">You place an item by saying which line it <strong>starts</strong> on and which it <strong>ends</strong> on. It fills the cells between. Spanning is free &mdash; just move the end line out.</p>
+  <pre><code>grid-column: 2 / 3;   /* one column  */
+grid-column: 2 / 4;   /* spans two   */
+grid-column: 1 / -1;  /* full width (-1 = last line) */
+grid-column: 1 / span 2;  /* start at 1, cover 2 tracks */</code></pre>
+  <div class="worked-example">
+    <h4>Worked Example: grid-area shorthand</h4>
+    <div class="step"><span class="step-num">1.</span><span><code>grid-area</code> packs four lines: <code>row-start / col-start / row-end / col-end</code>.</span></div>
+    <div class="step"><span class="step-num">2.</span><span><code>grid-area: 1 / 1 / 3 / 6</code> &rarr; rows line 1&rarr;3, columns line 1&rarr;6.</span></div>
+    <div class="result">Result: spans 2 row tracks and 5 column tracks. Both starts first, then both ends.</div>
+  </div>
+  <div class="trap">
+    <span class="tag">Trap: line 0 / start == end</span>
+    Lines start at <strong>1</strong>, never 0 (<code>0/3/0/3</code> fails). And start == end gives zero span. Use real distinct line numbers.
+  </div>
+
+  <h2 class="reveal">3. grid-area's double life &amp; template-areas <span class="time">&#x23F1; 2 min</span></h2>
+  <p class="reveal"><code>grid-area</code> means two totally different things:</p>
+  <div class="op-grid">
+    <div class="op-card"><strong>As line numbers</strong><br><code>grid-area: 1 / 1 / 3 / 6</code> &mdash; four lines.</div>
+    <div class="op-card"><strong>As a name</strong><br><code>grid-area: header</code> &mdash; only works with a <code>grid-template-areas</code> map on the container.</div>
+  </div>
+  <p class="reveal">The named approach, in 3 steps:</p>
+  <pre><code>.container {
+  /* 1. SIZE the tracks */
+  grid-template-rows: 100px 100px 500px 100px;
+  grid-template-columns: 340px 1020px;
+  /* 2. MAP the layout with names */
+  grid-template-areas:
+    "header  header"
+    "sidebar nav"
+    "sidebar article"
+    "footer  footer";
+}
+/* 3. CLAIM each name */
+.header { grid-area: header; }</code></pre>
+  <div class="insight">
+    <span class="tag">Key Insight</span>
+    Spanning = <strong>repeating the name</strong> (across a row spans columns, down rows spans rows). <code>.</code> = empty cell. A spanned area must be a <strong>solid rectangle</strong> or the whole map is silently ignored.
+  </div>
+
+  <h2 class="reveal">4. Sizing tracks: repeat, fr, minmax, clamp <span class="time">&#x23F1; 2 min</span></h2>
+  <ul class="reveal">
+    <li><code>repeat(count, size)</code> &mdash; many same-size tracks: <code>repeat(5, 1fr)</code>.</li>
+    <li><code>fr</code> &mdash; a share of the <strong>leftover</strong> space. <code>1fr 4fr</code> = 1/5 and 4/5. (<code>auto</code> = size to content, different thing.)</li>
+    <li><code>minmax(min, max)</code> &mdash; <strong>grid-only</strong>; track flexes between bounds.</li>
+    <li><code>clamp(min, ideal, max)</code> &mdash; <strong>global</strong>; sits at ideal, clamps at the edges.</li>
+    <li><code>min()</code> / <code>max()</code> &mdash; pick smallest / largest from a list.</li>
+  </ul>
+  <div class="trap">
+    <span class="tag">Trap: static vs dynamic</span>
+    <code>px</code> is static &mdash; <code>1px 3px</code> = two slivers, does NOT fill. <code>fr</code> is dynamic &mdash; <code>1fr 3fr</code> fills the width 1:3 and resizes. The ratio only "fills" with fr, never px.
+  </div>
+
+  <h2 class="reveal">5. The responsive one-liner: auto-fit / auto-fill <span class="time">&#x23F1; 2 min</span></h2>
+  <pre><code>grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));</code></pre>
+  <p class="reveal">"As many &ge;250px columns as fit, each growing to share leftover space." Browser counts using the <strong>min</strong>, then grows each to the <strong>max</strong>. No media queries. Live demo below (resize the window):</p>
+  <div class="gdemo af">
+    <div class="cell">card</div><div class="cell">card</div><div class="cell">card</div>
+    <div class="cell">card</div><div class="cell">card</div><div class="cell">card</div>
+  </div>
+  <div class="insight">
+    <span class="tag">Key Insight &mdash; the reversible one</span>
+    <strong>auto-FIT</strong> = empty tracks collapse, items FIT/stretch to fill. <strong>auto-FILL</strong> = empty ghost tracks stay, items keep their size. Identical when full; differ only with fewer items than fit. Mnemonic: FIT = items fit, FILL = row filled with ghosts. <a href="https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/">Live visualizer</a>.
+  </div>
+  <p class="reveal"><strong>Dynamic row count?</strong> You can't use <code>grid-template-rows</code> (that's for a known number). Use <code>grid-auto-rows: 200px</code> to size every auto-created row, or set height on the item.</p>
+
+  <h2 class="reveal">6. Explicit vs implicit, and global rows <span class="time">&#x23F1; 1 min</span></h2>
+  <div class="op-grid">
+    <div class="op-card"><strong>Explicit</strong><br>Tracks you define with <code>grid-template-*</code>.</div>
+    <div class="op-card"><strong>Implicit</strong><br>Tracks the browser auto-creates when items need them. Referencing a line (<code>grid-row: 2 / 4</code>) <em>creates</em> the rows to satisfy it.</div>
+  </div>
+  <div class="insight">
+    <span class="tag">Key Insight</span>
+    Rows are <strong>global</strong> &mdash; a row line cuts across ALL columns. The column with the most stacked items sets the row count; quieter columns span to match (e.g. a sidebar at <code>grid-row: 2 / 4</code> covering two rows the other column split into).
+  </div>
+
+  <h2 class="reveal">7. Alignment: 4 properties, 2 ideas <span class="time">&#x23F1; 1 min</span></h2>
+  <div class="symbol-ref">
+    <div class="sym-title">items vs content, self vs container</div>
+    <code>justify-items / align-items</code> &mdash; align each item INSIDE its own cell (per-item: <code>justify-self / align-self</code>).<br>
+    <code>justify-content / align-content</code> &mdash; align the whole group of TRACKS in the container (only when they don't fill it).<br>
+    <code>place-items: center</code> &mdash; align-items + justify-items shorthand. <code>justify-</code> = horizontal, <code>align-</code> = vertical.
+  </div>
+  <div class="trap">
+    <span class="tag">Trap: align-items center kills the stretch</span>
+    Default <code>stretch</code> makes an item fill its cell (the "auto-growing"). <code>center</code> shrinks it to content and centers it &mdash; so it stops filling, even in a tall cell. Want fill = stretch; want centered = center. (For a real logo, use <code>justify-self</code>, not <code>text-align</code>.)
+  </div>
+
+  <h2 class="reveal">8. Grid vs Flexbox: when to use which <span class="time">&#x23F1; 1 min</span></h2>
+  <div class="op-grid">
+    <div class="op-card"><strong>Flexbox</strong><br>Content-first, ONE dimension (row OR column). Nav bars, button groups, centering, a card's inner stack.</div>
+    <div class="op-card"><strong>Grid</strong><br>Layout-first, TWO dimensions (rows AND columns). Page skeletons, dashboards, card galleries.</div>
+  </div>
+  <div class="real-world reveal">
+    <span class="label">Real-World Connection</span>
+    The usual answer is <strong>both, nested</strong>: Grid for the page skeleton, Flexbox inside grid items for their content. Exactly what you built in the holy-grail mockup &mdash; Grid for regions, inner grids/flex for the content.
+  </div>
+
+  <div class="quiz">
+    <h3>Retrieval Quiz &mdash; answer before checking</h3>
+
+    <p class="quiz-q">1. When positioning a grid item, the numbers refer to...</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q1',this,0,0)"><span class="radio"></span> grid lines, not cells</li>
+      <li onclick="reveal('q1',this,1,0)"><span class="radio"></span> grid cells by index</li>
+      <li onclick="reveal('q1',this,2,0)"><span class="radio"></span> the tracks by number</li>
+      <li onclick="reveal('q1',this,3,0)"><span class="radio"></span> pixels from corner</li>
+    </ul>
+    <div class="quiz-answer" id="q1"><strong>Correct.</strong> You place items between line numbers; they fill the cells between. Lines start at 1, -1 = last.</div>
+
+    <p class="quiz-q">2. <code>fr</code> distributes which space?</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q2',this,0,1)"><span class="radio"></span> the leftover space</li>
+      <li onclick="reveal('q2',this,1,1)"><span class="radio"></span> the content space</li>
+      <li onclick="reveal('q2',this,2,1)"><span class="radio"></span> the full viewport</li>
+      <li onclick="reveal('q2',this,3,1)"><span class="radio"></span> the padding space</li>
+    </ul>
+    <div class="quiz-answer" id="q2"><strong>Correct.</strong> fr = a share of remaining space. <code>auto</code> is the one that sizes to content.</div>
+
+    <p class="quiz-q">3. Which function is grid-only?</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q3',this,0,2)"><span class="radio"></span> minmax, not clamp</li>
+      <li onclick="reveal('q3',this,1,2)"><span class="radio"></span> clamp, not minmax</li>
+      <li onclick="reveal('q3',this,2,2)"><span class="radio"></span> both are global</li>
+      <li onclick="reveal('q3',this,3,2)"><span class="radio"></span> neither is global</li>
+    </ul>
+    <div class="quiz-answer" id="q3"><strong>Correct.</strong> minmax() is grid-only; clamp() works on any property.</div>
+
+    <p class="quiz-q">4. With fewer items than fit, auto-fit will...</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q4',this,0,3)"><span class="radio"></span> stretch items to fill</li>
+      <li onclick="reveal('q4',this,1,3)"><span class="radio"></span> keep empty ghost cols</li>
+      <li onclick="reveal('q4',this,2,3)"><span class="radio"></span> stack into one column</li>
+      <li onclick="reveal('q4',this,3,3)"><span class="radio"></span> hide the extra cells</li>
+    </ul>
+    <div class="quiz-answer" id="q4"><strong>Correct.</strong> auto-fit collapses empties so items stretch. auto-fill keeps the ghost columns.</div>
+
+    <p class="quiz-q">5. Why does <code>align-items: center</code> stop filling?</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q5',this,0,4)"><span class="radio"></span> it sizes item to content</li>
+      <li onclick="reveal('q5',this,1,4)"><span class="radio"></span> it shrinks the whole cell</li>
+      <li onclick="reveal('q5',this,2,4)"><span class="radio"></span> it removes the row gap</li>
+      <li onclick="reveal('q5',this,3,4)"><span class="radio"></span> it disables the grid row</li>
+    </ul>
+    <div class="quiz-answer" id="q5"><strong>Correct.</strong> center sizes the item to content and centers it; default stretch fills. It shrinks the item, not the cell.</div>
+
+    <p class="quiz-q">6. Use Grid (over Flexbox) when the layout is...</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q6',this,0,5)"><span class="radio"></span> two-dimensional layout</li>
+      <li onclick="reveal('q6',this,1,5)"><span class="radio"></span> one row of buttons</li>
+      <li onclick="reveal('q6',this,2,5)"><span class="radio"></span> centering one item</li>
+      <li onclick="reveal('q6',this,3,5)"><span class="radio"></span> a single nav bar</li>
+    </ul>
+    <div class="quiz-answer" id="q6"><strong>Correct.</strong> Grid = layout-first, two dimensions. Flexbox = content-first, one dimension.</div>
+  </div>
+
+  <div class="source">
+    <span class="label">Primary source</span>
+    <a href="https://css-tricks.com/snippets/css/complete-guide-grid/">CSS-Tricks &mdash; A Complete Guide to Grid</a>. The single best reference; bookmark it for the dashboard project.
+  </div>
+
+  <div class="ask">
+    <span class="label">I'm your teacher &mdash; ask me</span>
+    Stuck on any of these tomorrow? Ask for a fresh example, or have me quiz you live before you start the Admin Dashboard.
+  </div>
+
+  <footer class="nav">
+    <span>Odin CSS Review &middot; Lesson 1</span>
+    <span>Next &rarr; Admin Dashboard project</span>
+  </footer>
+
+</main>
+
+<script src="../assets/lesson.js"></script>
+<script src="../assets/glossary.js"></script>
+<script src="../assets/course.js"></script>
+<script src="../assets/toolbar.js"></script>
+<script src="../assets/quiz.js"></script>
+<script>
+  // Quiz answer key: 0-based index of the correct option per question.
+  var correctAnswers = [0, 0, 0, 0, 0, 0];
+</script>
+</body>
+</html>

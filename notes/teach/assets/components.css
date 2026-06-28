@@ -1,0 +1,99 @@
+/* Teach lesson component library — Kendrick's locked style, extracted from the
+   CSC 365 "Relational Algebra" lesson he approved as the standard.
+
+   These are the reusable lesson building blocks layered ON TOP of styles.css
+   (which owns the design system: colors, type, body, headings, .callout,
+   .eyebrow, .dek, .nav, .source, .ask). Link BOTH in every lesson:
+       <link rel="stylesheet" href="../assets/styles.css">
+       <link rel="stylesheet" href="../assets/components.css">
+   Class names are subject-agnostic — reuse them for any topic, not just CS.
+   Depends on the CSS variables defined in styles.css (--accent, --good, etc.). */
+
+/* ---------- concept card grid (a.k.a. "op cards": symbol + name + blurb) ---------- */
+.op-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin: 1.4rem 0; }
+.op-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.2rem; }
+.op-card h4 { color: var(--white); margin: 0 0 0.3rem; font-size: 0.95rem; }
+.op-card .symbol { font-size: 1.4rem; color: var(--accent); margin-bottom: 0.3rem; }
+.op-card p { font-size: 0.85rem; margin: 0; color: var(--text-soft); }
+.op-card .arity { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ---------- reference / comparison table ---------- */
+.cardinality-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.85rem; margin: 1.2rem 0; }
+.cardinality-table th { color: var(--white); padding: 0.6rem 0.9rem; text-align: left; font-weight: 600; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.15); font-family: var(--mono); }
+.cardinality-table td { padding: 0.6rem 0.9rem; color: var(--text-soft); border-bottom: 1px solid rgba(255,255,255,0.06); }
+.cardinality-table tr:last-child td { border-bottom: none; }
+.cardinality-table code { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); }
+
+/* ---------- real-world connection (green left rule) ---------- */
+.real-world { border-left: 3px solid var(--good); padding-left: 1.2rem; margin: 1.6rem 0; font-size: 0.9rem; }
+.real-world .label { display: block; font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.45rem; color: var(--good); }
+
+/* ---------- worked example (numbered steps + green result) ---------- */
+.worked-example { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 14px; padding: 1.3rem 1.5rem; margin: 1.4rem 0; }
+.worked-example h4 { color: var(--white); margin: 0 0 0.8rem; font-size: 0.95rem; }
+.worked-example .step { display: flex; gap: 0.7rem; margin: 0.6rem 0; font-size: 0.86rem; color: var(--text-soft); line-height: 1.6; }
+.worked-example .step-num { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); font-weight: 600; min-width: 1.6rem; padding-top: 0.15rem; }
+.worked-example .expr { font-family: var(--mono); font-size: 0.82rem; color: var(--accent); background: rgba(255,111,94,0.06); padding: 0.3rem 0.6rem; border-radius: 6px; display: inline-block; margin: 0.3rem 0; }
+.worked-example .result { font-family: var(--mono); font-size: 0.82rem; color: var(--good); margin-top: 0.6rem; padding: 0.5rem 0.8rem; background: rgba(74,222,128,0.05); border-radius: 6px; border: 1px solid rgba(74,222,128,0.15); }
+
+/* ---------- trap: common-mistake callout (coral left rule) ---------- */
+.trap { background: rgba(255,111,94,0.04); border: 1px solid rgba(255,111,94,0.25); border-left: 3px solid var(--accent); border-radius: 12px; padding: 1rem 1.2rem; margin: 1.2rem 0; font-size: 0.88rem; color: var(--text-soft); line-height: 1.6; }
+.trap .tag { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.35rem; font-weight: 600; }
+
+/* ---------- insight: highlighted takeaway ---------- */
+.insight { background: rgba(255,111,94,0.05); border: 1px solid rgba(255,111,94,0.2); border-radius: 12px; padding: 1rem 1.2rem; margin: 1.2rem 0; font-size: 0.88rem; color: var(--text-soft); }
+.insight .tag { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.35rem; }
+
+/* ---------- "watch these timestamps" box ---------- */
+.watch-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.4rem 1.5rem; margin: 1.6rem 0; }
+.watch-box .watch-icon { font-size: 1.3rem; margin-right: 0.4rem; }
+.watch-box h3 { color: var(--accent); margin: 0 0 0.8rem; font-size: 1rem; }
+.watch-box li { margin: 0.5rem 0; font-size: 0.88rem; color: var(--text-soft); }
+.watch-box li strong { color: var(--white); }
+
+/* ---------- symbol / notation reference box ---------- */
+.symbol-ref { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.3rem; margin: 1.2rem 0; font-family: var(--mono); font-size: 0.8rem; line-height: 2; color: var(--text-soft); }
+.symbol-ref .sym-title { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; font-weight: 600; }
+.symbol-ref code { color: var(--accent); background: rgba(255,111,94,0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
+
+/* ---------- practice problem (hidden answer reveal) ----------
+   Toggle inline: onclick="this.nextElementSibling.classList.toggle('visible')" */
+.practice { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.3rem 1.5rem; margin: 1.6rem 0; }
+.practice h4 { color: var(--white); margin: 0 0 0.3rem; font-size: 0.92rem; }
+.practice .domain { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 0.8rem; }
+.practice .prompt { font-size: 0.88rem; color: var(--text); margin: 0.6rem 0; line-height: 1.6; }
+.practice .show-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; border-radius: 100px; font-size: 0.78rem; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text-soft); font-family: var(--sans); margin-top: 0.6rem; transition: all 0.2s; }
+.practice .show-btn:hover { border-color: var(--white); color: var(--white); background: rgba(255,255,255,0.05); }
+.practice .answer { display: none; margin-top: 0.8rem; padding: 0.8rem 1rem; background: rgba(74,222,128,0.04); border: 1px solid rgba(74,222,128,0.15); border-radius: 10px; font-size: 0.84rem; color: var(--text-soft); font-family: var(--mono); line-height: 1.8; }
+.practice .answer.visible { display: block; }
+
+/* ---------- multiple-choice quiz (paired with quiz.js) ---------- */
+.quiz { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 1.6rem; margin: 1.5rem 0; }
+.quiz h3 { color: var(--accent); margin-top: 0; font-size: 1rem; }
+.quiz-q { font-weight: 600; color: var(--white); margin: 1.4rem 0 0.6rem; font-size: 0.95rem; }
+.quiz-opts { list-style: none; padding: 0; }
+.quiz-opts li { padding: 0.6rem 1rem 0.6rem 0.7rem; margin: 0.4rem 0; border-radius: 10px; cursor: pointer; border: 1px solid var(--border); transition: all 0.2s; font-size: 0.86rem; display: flex; align-items: center; gap: 0.7rem; }
+.quiz-opts li:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.03); }
+.quiz-opts li .radio { width: 1.1rem; height: 1.1rem; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.15); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.25s; }
+.quiz-opts li.correct { border-color: var(--good); background: rgba(74,222,128,0.06); }
+.quiz-opts li.correct .radio { background: var(--good); border-color: var(--good); }
+.quiz-opts li.correct .radio::after { content: '\2713'; color: var(--bg); font-size: 0.65rem; font-weight: 700; }
+.quiz-opts li.wrong-flash { animation: shake 0.4s ease, pulse-red 1s ease forwards; border-color: var(--accent); }
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+@keyframes pulse-red { 0%{background:rgba(255,111,94,0.15)} 100%{background:transparent} }
+.quiz-answer { display: none; background: rgba(74,222,128,0.06); border: 1px solid rgba(74,222,128,0.2); border-radius: 12px; padding: 1rem; margin-top: 0.8rem; font-size: 0.88rem; color: var(--text-soft); line-height: 1.6; }
+.quiz-answer strong { color: var(--good); }
+
+/* ---------- inline data / tuple table ---------- */
+.tuple-table { width: auto; border-collapse: separate; border-spacing: 0; font-size: 0.82rem; margin: 0.8rem 0; font-family: var(--mono); }
+.tuple-table th { color: var(--accent); padding: 0.4rem 0.7rem; text-align: center; font-weight: 600; border-bottom: 1px solid rgba(255,111,94,0.3); }
+.tuple-table td { padding: 0.35rem 0.7rem; color: var(--text-soft); text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); }
+
+/* ---------- per-section reading-time indicator: <h2>Title <span class="time">⏱ 8 min</span></h2> ---------- */
+.time { font-size: 0.55em; font-weight: 400; color: var(--muted); font-family: var(--mono); vertical-align: middle; margin-left: 0.6rem; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 560px) {
+  .op-grid { grid-template-columns: 1fr; }
+  .worked-example { padding: 1rem; }
+}
