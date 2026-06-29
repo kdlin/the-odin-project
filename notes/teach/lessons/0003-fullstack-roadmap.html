@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fullstack Roadmap -- Build & Ship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/toolbar.css">
+<style>
+  .vid { display:flex; align-items:center; gap:.8rem; background:rgba(255,111,94,.08);
+         border:1px solid #ff6f5e; border-radius:10px; padding:.8rem 1rem; margin:1rem 0;
+         text-decoration:none; }
+  .vid:hover { background:rgba(255,111,94,.16); }
+  .vid .play { font-size:1.4rem; }
+  .vid .vmeta { display:flex; flex-direction:column; }
+  .vid .vtitle { font-weight:600; color:var(--text); }
+  .vid .vby { font-family:var(--mono); font-size:.72rem; color:var(--muted); }
+  .stage-h { display:flex; align-items:baseline; gap:.6rem; }
+  .stage-n { font-family:var(--mono); font-size:.8rem; color:#ff6f5e; }
+  .ship { background:rgba(74,222,128,.1); border-left:3px solid #4ade80; padding:.75rem 1rem;
+          border-radius:4px; margin:1rem 0; }
+  .ship .label { color:#4ade80; font-weight:600; font-family:var(--mono); font-size:.72rem;
+          text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:.3rem; }
+</style>
+</head>
+<body>
+<main class="lesson">
+
+  <p class="eyebrow">Fullstack JS / Lesson 0 &middot; The Plan</p>
+  <h1>Fullstack Roadmap -- Build &amp; Ship</h1>
+  <p class="dek">Your curated path from where you are (strong CS foundations) to a shipped fullstack product and startup-ready portfolio. Read this first; it drives every stage lesson.</p>
+  <p style="font-family:var(--mono);font-size:0.78rem;color:var(--muted);">Method: watch the ONE video per stage -> build the stage project -> learn gaps on demand. Not tutorial hell: 1 hr video : 3 hr building.</p>
+
+  <div class="callout">
+    <span class="label">Who this is for (you)</span>
+    You have A's in Python, OOP/Java, DSA, computer org, databases. You're past "learn to program." Your gap is <strong>building glue</strong> (frameworks, APIs, deploy) + <strong>JS-native concepts</strong>. This plan skips what you know and attacks only those two gaps.
+  </div>
+
+  <div class="insight">
+    <span class="tag">The North Star</span>
+    The goal is not "finish a curriculum." It's <strong>ship a real product people use</strong>. Every stage ends in a build. By Stage 5 you have a deployed fullstack app -- that's your portfolio centerpiece and your startup-interview ticket.
+  </div>
+
+  <h2 class="reveal">What we SKIP (and why)</h2>
+  <div class="trap">
+    <span class="tag">Deliberate omissions</span>
+    <strong>HTML/CSS deep dives</strong> (you have enough to build UIs) &middot; <strong>DSA / DB theory / OOP theory</strong> (coursework done; DSA is a separate interview track) &middot; <strong>TypeScript</strong> (add after first ship) &middot; <strong>Docker / K8s / CI-CD / Nginx</strong> (enterprise devops, learn on the job) &middot; <strong>Redis / queues / GraphQL / microservices</strong> (premature for an MVP) &middot; <strong>Vue / Angular / Mongo</strong> (pick React + Postgres). Each skip is either known or learn-when-a-project-demands-it.
+  </div>
+
+  <!-- ===================== STAGE 1 ===================== -->
+  <h2 class="reveal stage-h"><span class="stage-n">STAGE 1</span> JavaScript (deep on JS-native) <span class="time">&#x23F1; ~2-3 wks</span></h2>
+  <p class="reveal">The hinge of everything -- React is 70% JS, Node IS JS. Skim the parts that match other languages; go <strong>slow</strong> on the JS-native parts: closures, <code>this</code>, prototypes, async/event loop, the DOM.</p>
+  <a class="vid" href="https://www.youtube.com/watch?v=n8mNX2YqkUs" target="_blank" rel="noopener">
+    <span class="play">&#9654;</span><span class="vmeta"><span class="vtitle">Learn JavaScript (interactive full course)</span><span class="vby">freeCodeCamp / Scrimba -- opens YouTube</span></span></a>
+  <p class="reveal">Supplement per-concept with <strong>Web Dev Simplified</strong> (one clean video each for closures, the event loop, fetch). For depth on the weird parts, <strong>Fireship "JavaScript in 100 Seconds"</strong> + its deeper cuts.</p>
+  <div class="trap">
+    <span class="tag">Gotchas the videos gloss over</span>
+    &bull; <code>==</code> vs <code>===</code> -- always use <code>===</code> (no type coercion surprises).<br>
+    &bull; <code>var</code> is dead -- use <code>const</code> by default, <code>let</code> when reassigning. <code>var</code> is function-scoped + hoisted = bugs.<br>
+    &bull; <code>this</code> is decided by HOW a function is CALLED, not where it's defined. Arrow functions don't bind their own <code>this</code> -- that's why they're used for callbacks.<br>
+    &bull; Closures aren't academic -- every event handler / callback that "remembers" a variable IS a closure. You'll use them constantly.<br>
+    &bull; Async isn't parallel -- JS is single-threaded; the event loop just defers work. <code>await</code> pauses the function, not the program.<br>
+    &bull; <code>const arr = []</code> then <code>arr.push()</code> works -- <code>const</code> locks the binding, not the contents.
+  </div>
+  <div class="ship">
+    <span class="label">Ship this stage</span>
+    A small JS app with no framework: fetch from a public API (weather, movies, GitHub) and render results to the DOM with user input. Forces fetch + async + DOM + events together. (Steal Odin's "Weather App" spec.)
+  </div>
+
+  <!-- ===================== STAGE 2 ===================== -->
+  <h2 class="reveal stage-h"><span class="stage-n">STAGE 2</span> React (the user-facing layer) <span class="time">&#x23F1; ~2 wks</span></h2>
+  <p class="reveal">This is where "users see your stuff" lives. Learn the floor: components, JSX, props, state (<code>useState</code>), effects (<code>useEffect</code>), events, forms, conditional rendering, lists, and basic routing. Stop before context/reducers/perf -- add those when a project needs them.</p>
+  <a class="vid" href="https://www.youtube.com/watch?v=dCLhUialKPQ" target="_blank" rel="noopener">
+    <span class="play">&#9654;</span><span class="vmeta"><span class="vtitle">React 19 Full Course -- build an app in ~2 hrs</span><span class="vby">opens YouTube</span></span></a>
+  <a class="vid" href="https://react.dev/learn" target="_blank" rel="noopener">
+    <span class="play">&#128218;</span><span class="vmeta"><span class="vtitle">react.dev -- the OFFICIAL tutorial (use over randoms)</span><span class="vby">react.dev/learn</span></span></a>
+  <div class="trap">
+    <span class="tag">Gotchas the videos gloss over</span>
+    &bull; <strong>State is immutable</strong> -- never mutate then set. Make a new object/array: <code>setItems([...items, x])</code>, not <code>items.push(x)</code>.<br>
+    &bull; State updates are <strong>async + batched</strong> -- reading state right after <code>setState</code> gives the OLD value. Use the updater form <code>setX(prev =&gt; ...)</code> when depending on previous.<br>
+    &bull; <code>useEffect</code> runs after render; the <strong>dependency array</strong> controls when. Empty <code>[]</code> = once on mount. Missing it = every render (common infinite-loop bug).<br>
+    &bull; Every list item needs a stable <code>key</code> -- index-as-key breaks on reorder.<br>
+    &bull; A component re-renders when its state/props change -- that's normal, not a leak.<br>
+    &bull; JSX is JS -- <code>className</code> not <code>class</code>, <code>{expression}</code> for dynamic values.
+  </div>
+  <div class="ship">
+    <span class="label">Ship this stage</span>
+    Rebuild your Stage 1 app's frontend in React, OR build a CRUD UI (a task/notes/bookmark app) with add/edit/delete + a form. Deploy the frontend to Vercel/Netlify (free, ~5 min).
+  </div>
+
+  <!-- ===================== STAGE 3 ===================== -->
+  <h2 class="reveal stage-h"><span class="stage-n">STAGE 3</span> Node + Express (your backend) <span class="time">&#x23F1; ~2 wks</span></h2>
+  <p class="reveal">Server-side JS. Learn: the Node runtime basics, npm, Express routing, middleware, REST verbs (GET/POST/PUT/DELETE), route params, request/response, JSON, error handling, CORS. This is where your OOP/DSA foundation pays off -- the logic is familiar, only the framework is new.</p>
+  <a class="vid" href="https://www.youtube.com/watch?v=CnH3kAXSrmU" target="_blank" rel="noopener">
+    <span class="play">&#9654;</span><span class="vmeta"><span class="vtitle">Express Crash Course</span><span class="vby">Traversy Media -- opens YouTube</span></span></a>
+  <a class="vid" href="https://www.youtube.com/watch?v=P5q8rUGCN9k" target="_blank" rel="noopener">
+    <span class="play">&#9654;</span><span class="vmeta"><span class="vtitle">Express / Node REST API Crash Course (alt)</span><span class="vby">Laith Academy -- opens YouTube</span></span></a>
+  <div class="trap">
+    <span class="tag">Gotchas the videos gloss over</span>
+    &bull; <strong>Middleware order matters</strong> -- Express runs them top-to-bottom; <code>app.use(express.json())</code> must come BEFORE routes that read <code>req.body</code>, or body is undefined.<br>
+    &bull; <strong>CORS</strong> will block your React frontend from calling your API on a different port -- add the <code>cors</code> middleware early (a day-one confusion for everyone).<br>
+    &bull; Always handle async route errors (<code>try/catch</code> or a wrapper) -- an unhandled rejection can hang the request.<br>
+    &bull; Never put secrets/DB URLs in code -- use <code>.env</code> + <code>dotenv</code>, and gitignore it.<br>
+    &bull; A REST API returns JSON, not HTML -- the frontend renders; the API serves data.
+  </div>
+  <div class="ship">
+    <span class="label">Ship this stage</span>
+    Build a REST API for your CRUD app (in-memory data is fine first). Connect your React frontend to it via <code>fetch</code>. Now you have a real client-server app talking over HTTP.
+  </div>
+
+  <!-- ===================== STAGE 4 ===================== -->
+  <h2 class="reveal stage-h"><span class="stage-n">STAGE 4</span> PostgreSQL + Prisma (data that persists) <span class="time">&#x23F1; ~1-1.5 wks</span></h2>
+  <p class="reveal">You know SQL (CSC365) -- this is mostly the <em>wiring</em>. Prisma is an ORM: define your schema, it generates a type-safe client so you query the DB from JS without raw SQL strings. Learn: schema/models, migrations, relations, CRUD via Prisma client, seeding.</p>
+  <a class="vid" href="https://www.youtube.com/watch?v=gimSKEsWYb4" target="_blank" rel="noopener">
+    <span class="play">&#9654;</span><span class="vmeta"><span class="vtitle">Prisma ORM Full Course 2025</span><span class="vby">opens YouTube</span></span></a>
+  <div class="trap">
+    <span class="tag">Gotchas the videos gloss over</span>
+    &bull; <strong>Migrations are not optional</strong> -- every schema change = <code>prisma migrate dev</code>. Editing the DB by hand desyncs Prisma.<br>
+    &bull; Your CSC365 SQL still matters -- Prisma generates SQL, but you debug performance by reading it. Know your indexes/joins.<br>
+    &bull; Use a real Postgres early (Neon/Supabase free tier) so dev matches prod -- SQLite-in-dev then Postgres-in-prod causes surprises.<br>
+    &bull; Connection limits on free tiers are low -- use a single Prisma client instance, don't instantiate per request.
+  </div>
+  <div class="ship">
+    <span class="label">Ship this stage</span>
+    Swap your API's in-memory data for Postgres via Prisma. Data now survives restarts. This is a genuine fullstack app: React -> Express -> Prisma -> Postgres.
+  </div>
+
+  <!-- ===================== STAGE 5 ===================== -->
+  <h2 class="reveal stage-h"><span class="stage-n">STAGE 5</span> Auth + Deploy (make it real) <span class="time">&#x23F1; ~1.5 wks</span></h2>
+  <p class="reveal">The two things that turn a demo into a product: users can log in, and it's live on the internet. Learn: password hashing (bcrypt), sessions or JWT, protected routes; then deploy frontend + backend + DB.</p>
+  <a class="vid" href="https://www.youtube.com/watch?v=P5q8rUGCN9k" target="_blank" rel="noopener">
+    <span class="play">&#9654;</span><span class="vmeta"><span class="vtitle">Backend complete: Node + Express + JWT + Postgres + Prisma</span><span class="vby">PedroTech (auth section) -- opens YouTube</span></span></a>
+  <a class="vid" href="https://docs.railway.com/quick-start" target="_blank" rel="noopener">
+    <span class="play">&#128640;</span><span class="vmeta"><span class="vtitle">Railway Quick Start (deploy backend + DB)</span><span class="vby">docs.railway.com -- Vercel for the frontend</span></span></a>
+  <div class="trap">
+    <span class="tag">Gotchas the videos gloss over</span>
+    &bull; <strong>NEVER store plaintext passwords</strong> -- always hash with bcrypt. This is non-negotiable and interviewers ask.<br>
+    &bull; JWT vs sessions: JWT for stateless APIs, sessions for traditional server-rendered. Either is fine for an MVP -- pick one, don't agonize.<br>
+    &bull; Env vars differ per environment -- your prod DB URL + secrets go in the host's dashboard, never in git.<br>
+    &bull; Set CORS to your real deployed frontend domain in prod (not <code>*</code>).<br>
+    &bull; Deploy EARLY and often -- "works on my machine" hides a dozen prod-only bugs. Deploy a hello-world first, then iterate.
+  </div>
+  <div class="ship">
+    <span class="label">Ship this stage = THE milestone</span>
+    Add login to your app, deploy all three layers, put the live URL on your resume/GitHub. Get 5-10 real users (friends count). <strong>You are now application-ready.</strong>
+  </div>
+
+  <h2 class="reveal">After Stage 5 (when, not now)</h2>
+  <div class="real-world reveal">
+    <span class="label">The "next" pile</span>
+    TypeScript (add types to your project) &middot; Next.js (SSR, the startup default) &middot; testing (Jest/Vitest) &middot; a second, more ambitious product. By here you'll know what your project actually needs -- learn those on demand, not preemptively.
+  </div>
+
+  <div class="insight">
+    <span class="tag">The two parallel tracks</span>
+    This roadmap is the BUILD track. Run a light <strong>DSA track</strong> alongside (~3-4 LeetCode/week in Java) for interviews -- startups weight it less than big tech, but it's still the gate. Build track gets you the portfolio; DSA gets you through the loop.
+  </div>
+
+  <div class="source">
+    <span class="label">Reference, not curriculum</span>
+    <a href="https://roadmap.sh/full-stack">roadmap.sh/full-stack</a> (the full map -- we curated from it), <a href="https://developer.mozilla.org/en-US/docs/Web">MDN</a> (lookups), <a href="https://react.dev">react.dev</a> (official React). The Odin Project's project specs are great build prompts -- steal those, skip the lessons.
+  </div>
+
+  <div class="ask">
+    <span class="label">I'm your teacher -- ask me</span>
+    Each stage gets its own built lessons as you reach it. Start with Stage 1 (JS Mental Model lesson is built -- use the Lessons button). When you finish a stage's build, tell me and I'll build the next stage's lessons + review your project.
+  </div>
+
+  <footer class="nav">
+    <span>Fullstack JS &middot; The Plan</span>
+    <span>Next &rarr; Stage 1: JS Mental Model</span>
+  </footer>
+
+</main>
+
+<script src="../assets/lesson.js"></script>
+<script src="../assets/glossary.js"></script>
+<script src="../assets/course.js"></script>
+<script src="../assets/toolbar.js"></script>
+<script src="../assets/quiz.js"></script>
+<script>var correctAnswers = [];</script>
+</body>
+</html>

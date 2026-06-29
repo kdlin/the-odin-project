@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JS Mental Model + Modern Syntax</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../assets/components.css">
+<link rel="stylesheet" href="../assets/toolbar.css">
+<style>
+  .vid { display:flex; align-items:center; gap:.8rem; background:rgba(255,111,94,.08);
+         border:1px solid #ff6f5e; border-radius:10px; padding:.8rem 1rem; margin:1rem 0; text-decoration:none; }
+  .vid:hover { background:rgba(255,111,94,.16); }
+  .vid .play { font-size:1.4rem; } .vid .vmeta { display:flex; flex-direction:column; }
+  .vid .vtitle { font-weight:600; color:var(--text); }
+  .vid .vby { font-family:var(--mono); font-size:.72rem; color:var(--muted); }
+</style>
+</head>
+<body>
+<main class="lesson">
+
+  <p class="eyebrow">Fullstack JS / Stage 1 &middot; Lesson 1</p>
+  <h1>JS Mental Model + Modern Syntax</h1>
+  <p class="dek">You already program. This gets you from "Java/Python brain" to "JS brain" fast -- the mental model and the modern syntax you'll type every day.</p>
+  <p style="font-family:var(--mono);font-size:0.78rem;color:var(--muted);">Total: ~12 min read + build after. You know the concepts; this is the JS dialect of them.</p>
+
+  <div class="callout">
+    <span class="label">How to use this</span>
+    Skim what matches Java/Python (variables, loops, functions exist -- you know these). Slow down on what's marked <strong>JS-native</strong> -- those are the genuinely different bits where your other-language instincts mislead you.
+  </div>
+
+  <a class="vid" href="https://www.youtube.com/watch?v=n8mNX2YqkUs" target="_blank" rel="noopener">
+    <span class="play">&#9654;</span><span class="vmeta"><span class="vtitle">Learn JavaScript (interactive full course)</span><span class="vby">freeCodeCamp / Scrimba -- watch alongside, then build</span></span></a>
+
+  <h2 class="reveal">1. The mental model: how JS differs <span class="time">&#x23F1; 2 min</span></h2>
+  <div class="op-grid">
+    <div class="op-card"><strong>Dynamically typed</strong><br>No type declarations (like Python). A variable can hold anything. Type errors show up at runtime, not compile.</div>
+    <div class="op-card"><strong>Single-threaded + async</strong><br>One thread, but non-blocking via the event loop. Unlike Java's threads -- you'll use <code>async/await</code>, not parallelism.</div>
+    <div class="op-card"><strong>Functions are values</strong><br>Pass them as arguments, return them, store them. First-class functions are everywhere (callbacks, array methods).</div>
+    <div class="op-card"><strong>Prototype-based, not class-based</strong><br><code>class</code> exists but it's sugar over prototypes -- not Java's class model under the hood. (Detail for later.)</div>
+  </div>
+
+  <h2 class="reveal">2. Variables: const by default <span class="time">&#x23F1; 1 min</span></h2>
+  <pre><code>const name = "Kendrick";   // can't be reassigned -- your DEFAULT
+let count = 0;             // use only when you reassign
+count = 1;                 // ok
+// var -- DEAD. Never use it. (function-scoped + hoisted = bugs)</code></pre>
+  <div class="trap">
+    <span class="tag">Gotcha: const locks the binding, not the contents</span>
+    <code>const arr = []; arr.push(1);</code> &mdash; totally fine. <code>const</code> stops <em>reassignment</em> (<code>arr = somethingElse</code>), not mutation of the object/array it points to.
+  </div>
+
+  <h2 class="reveal">3. Arrow functions (JS-native habit) <span class="time">&#x23F1; 2 min</span></h2>
+  <pre><code>// classic
+function add(a, b) { return a + b; }
+// arrow -- concise, implicit return when one expression
+const add = (a, b) => a + b;
+const square = n => n * n;          // one param, no parens needed
+const greet = () => console.log("hi");</code></pre>
+  <div class="insight">
+    <span class="tag">Why arrows matter</span>
+    You'll use them constantly as callbacks (<code>arr.map(x =&gt; x * 2)</code>) and in React. The big behavioral difference (coming in the Functions lesson): arrows <strong>don't bind their own <code>this</code></strong> -- which is exactly why they're the default for callbacks.
+  </div>
+
+  <h2 class="reveal">4. Template literals <span class="time">&#x23F1; 1 min</span></h2>
+  <pre><code>const name = "Kendrick";
+const msg = `Hi ${name}, you have ${count + 1} tasks`;  // backticks + ${}
+// multiline works too, no \n needed</code></pre>
+
+  <h2 class="reveal">5. Destructuring (you'll see it everywhere) <span class="time">&#x23F1; 2 min</span></h2>
+  <pre><code>const user = { name: "K", age: 22 };
+const { name, age } = user;          // pull fields into variables
+
+const nums = [1, 2, 3];
+const [first, second] = nums;        // pull by position
+
+// super common in React: const [count, setCount] = useState(0);
+function greet({ name }) { ... }     // destructure a param directly</code></pre>
+  <div class="insight">
+    <span class="tag">Why it matters</span>
+    React's <code>useState</code>, props, and Node's module imports all lean on destructuring. Not knowing it makes React code look like hieroglyphics. Know it cold.
+  </div>
+
+  <h2 class="reveal">6. Spread &amp; rest (<code>...</code>) <span class="time">&#x23F1; 2 min</span></h2>
+  <pre><code>// SPREAD -- expand into a new array/object (immutable updates!)
+const more = [...nums, 4];                 // [1,2,3,4]
+const updated = { ...user, age: 23 };      // copy + override
+
+// REST -- gather the rest into one
+const [head, ...tail] = nums;              // head=1, tail=[2,3]
+function sum(...args) { ... }              // any number of args</code></pre>
+  <div class="trap">
+    <span class="tag">Why this is load-bearing in React</span>
+    React state must be updated <strong>immutably</strong>. You never mutate -- you spread into a new copy: <code>setUser({ ...user, age: 23 })</code>. This single pattern shows up in nearly every React component. Master it now.
+  </div>
+
+  <h2 class="reveal">7. Modules (import/export) <span class="time">&#x23F1; 1 min</span></h2>
+  <pre><code>// math.js
+export const add = (a, b) => a + b;
+export default function multiply(a, b) { return a * b; }
+
+// app.js
+import multiply, { add } from "./math.js";   // default + named</code></pre>
+
+  <div class="trap">
+    <span class="tag">Top JS-native gotchas (your Java/Python instincts misfire here)</span>
+    &bull; <strong><code>===</code> not <code>==</code></strong> &mdash; <code>==</code> does type coercion (<code>0 == ""</code> is true!). Always use <code>===</code>.<br>
+    &bull; <strong>Truthy/falsy</strong> &mdash; <code>0, "", null, undefined, NaN, false</code> are falsy; everything else truthy. <code>if (arr)</code> is true even for <code>[]</code>.<br>
+    &bull; <strong><code>null</code> vs <code>undefined</code></strong> &mdash; <code>undefined</code> = never set; <code>null</code> = intentionally empty. Both falsy.<br>
+    &bull; <strong>Numbers are floats</strong> &mdash; <code>0.1 + 0.2 !== 0.3</code>. No separate int type.<br>
+    &bull; <strong>Hoisting</strong> &mdash; <code>const</code>/<code>let</code> aren't usable before declaration (unlike <code>var</code>). Just declare before use.
+  </div>
+
+  <div class="practice">
+    <h4>Practice: predict the output</h4>
+    <div class="domain">const user = { name: "K", role: "dev" };
+const copy = { ...user, role: "lead" };
+console.log(copy);
+console.log(0 == "");
+console.log([] ? "yes" : "no");</div>
+    <button class="show-btn" onclick="this.nextElementSibling.classList.toggle('visible')">Show Answer</button>
+    <div class="answer"><code>{ name: "K", role: "lead" }</code> (spread copies, then role overrides) &middot; <code>true</code> (<code>==</code> coerces -- exactly why you avoid it) &middot; <code>"yes"</code> (an empty array is truthy -- a classic trap).</div>
+  </div>
+
+  <div class="quiz">
+    <h3>Check Your Understanding</h3>
+
+    <p class="quiz-q">1. Default variable keyword in modern JS?</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q1',this,0,0)"><span class="radio"></span> const, then let if needed</li>
+      <li onclick="reveal('q1',this,1,0)"><span class="radio"></span> var for everything now</li>
+      <li onclick="reveal('q1',this,2,0)"><span class="radio"></span> let for all variables</li>
+      <li onclick="reveal('q1',this,3,0)"><span class="radio"></span> always declare with var</li>
+    </ul>
+    <div class="quiz-answer" id="q1"><strong>Correct.</strong> const by default; let only when you reassign; var never (function-scoped + hoisted = bugs).</div>
+
+    <p class="quiz-q">2. <code>const arr = [1]; arr.push(2)</code> -- result?</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q2',this,0,1)"><span class="radio"></span> works, arr is [1, 2]</li>
+      <li onclick="reveal('q2',this,1,1)"><span class="radio"></span> error, const is frozen</li>
+      <li onclick="reveal('q2',this,2,1)"><span class="radio"></span> silently does nothing</li>
+      <li onclick="reveal('q2',this,3,1)"><span class="radio"></span> resets arr to empty</li>
+    </ul>
+    <div class="quiz-answer" id="q2"><strong>Correct.</strong> const locks the binding, not the contents. You can mutate the array; you just can't reassign <code>arr</code>.</div>
+
+    <p class="quiz-q">3. To immutably update an object in React state, you...</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q3',this,0,2)"><span class="radio"></span> spread into a new object</li>
+      <li onclick="reveal('q3',this,1,2)"><span class="radio"></span> mutate then call setState</li>
+      <li onclick="reveal('q3',this,2,2)"><span class="radio"></span> reassign the const var</li>
+      <li onclick="reveal('q3',this,3,2)"><span class="radio"></span> delete and rebuild it</li>
+    </ul>
+    <div class="quiz-answer" id="q3"><strong>Correct.</strong> <code>{ ...obj, field: newVal }</code> -- spread copies, then override. Never mutate state directly.</div>
+
+    <p class="quiz-q">4. Why prefer <code>===</code> over <code>==</code>?</p>
+    <ul class="quiz-opts">
+      <li onclick="reveal('q4',this,0,3)"><span class="radio"></span> no type coercion surprises</li>
+      <li onclick="reveal('q4',this,1,3)"><span class="radio"></span> it runs measurably faster</li>
+      <li onclick="reveal('q4',this,2,3)"><span class="radio"></span> == is a syntax error now</li>
+      <li onclick="reveal('q4',this,3,3)"><span class="radio"></span> === allows null checks</li>
+    </ul>
+    <div class="quiz-answer" id="q4"><strong>Correct.</strong> <code>==</code> coerces types (<code>0 == ""</code> is true); <code>===</code> compares value AND type, no surprises.</div>
+  </div>
+
+  <div class="source">
+    <span class="label">Primary source</span>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript">MDN -- A re-introduction to JavaScript</a> (written for people who already program -- exactly you).
+  </div>
+
+  <div class="ask">
+    <span class="label">I'm your teacher -- ask me</span>
+    Next Stage 1 lessons (Functions/closures/this, Arrays/iteration, Async, DOM) build on request. Do this one + start the Stage 1 build, then ping me for the next.
+  </div>
+
+  <footer class="nav">
+    <span>Stage 1 &middot; Lesson 1</span>
+    <span>Next &rarr; Functions, Closures &amp; this</span>
+  </footer>
+
+</main>
+
+<script src="../assets/lesson.js"></script>
+<script src="../assets/glossary.js"></script>
+<script src="../assets/course.js"></script>
+<script src="../assets/toolbar.js"></script>
+<script src="../assets/quiz.js"></script>
+<script>var correctAnswers = [0, 0, 0, 0];</script>
+</body>
+</html>
