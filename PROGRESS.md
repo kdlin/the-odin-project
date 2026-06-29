@@ -1,91 +1,95 @@
-# Fullstack JS Progress Tracker
+# Fullstack JS Roadmap (FINALIZED)
 
 **Goal:** Ship a real fullstack product + be application-ready (startups / product roles).
-**Method:** Selective TOP -- projects are the curriculum. Docs on-demand; tutor (Claude) for gaps. Baseline the 5 JS-native concepts before project-osmosis.
-**Pace:** ~16 hr/week on TOP (2hr/day weekday + ~6hr weekend). Started 2026-06-29.
+**Started:** 2026-06-29 · **Target:** application-ready ~mid-Aug, plan done ~late-Aug.
 
-📚 Live lessons: https://kdlin.github.io/the-odin-project/notes/teach/lessons/0003-fullstack-roadmap.html
-
----
-
-## 🎯 Milestones
-- [ ] **Application-ready** (~mid Aug) -- JS projects + React + first deployed fullstack Node app
-- [ ] **TOP done** (~late Aug) -- through Odin-Book capstone
-
-## 🔁 Parallel track (NOT counted in the 16hr -- separate ~40min/day)
-- [ ] DSA: ~3-4 LeetCode/week in Java (interview gate; startups weight lighter than big tech)
+> Decision is closed. No more re-evaluating the path. Execution is the only variable left.
 
 ---
 
-## Standing filters (auto-applied per lesson)
+## ⏱ TIME BLOCKING (the schedule you stick to)
+
+**Weekday (Mon-Fri) -- inside the workday study container:**
 ```
-SKIP   -> JS DSA/CS block (A's already) · React class components (legacy) · DB theory (CSC365)
-DO FULL-> the Node course (crown jewel -> Odin-Book)
-BASELINE FIRST -> async/event-loop, closures, `this`, prototypes, the DOM
-DOCS   -> skip by default; read only when a topic SPAWNS unknowns instead of landing
-PROJECTS -> always do them; they're the real curriculum
+2.0 hr   MAIN block   -> current phase (watch + practice, or build)
+0.7 hr   DSA block    -> 1 LeetCode in Java (interview gate)
+1.0 hr   Guitar       -> anchor, non-negotiable, separate
+```
+**Weekend (Sat + Sun):**
+```
+~3 hr/day  PROJECT PUSH -> the bigger build sessions
+```
+**= ~16 hr/week on SWE + DSA daily.** End each day: 2-min "what will I forget?" -> Anki.
+
+> Protect the TIME block like a meeting (inelastic). Flex the CONTENT, never the slot.
+
+---
+
+## 🗺 PHASE TIMELINE (~8 weeks)
+
+```
+NOW    Jun 29 - Jul 1   Stage 0: finish Admin Dashboard  (Grid capstone)
+P1     Jul 2  - Jul 20  JavaScript    (~2.5 wks)
+P2     Jul 21 - Jul 31  React         (~1.5 wks)
+P3     Aug 1  - Aug 28  Node + Postgres (~4 wks)  ⭐ crown jewel
+       (Databases = SQL Zoo refresher, folded in, ~1 day)
+─────────────────────────────────────────────────────────
+🎯 Application-ready  ~mid-Aug  (mid-Node: JS projects + React + 1 deployed fullstack app)
+🎯 Plan done          ~late-Aug (through Odin-Book capstone)
 ```
 
 ---
 
-## ✅ Stage 0 -- Intermediate HTML/CSS (finishing)
-- [ ] Project: Admin Dashboard  *(in progress -- the Grid capstone)*
-- [x] Grid lessons (Positioning / Advanced / Flexbox+Grid)
+## 📋 METHOD PER STAGE (finalized)
 
-## Stage 1 -- JavaScript  (~40hr / ~2.5 wks)
-- [ ] Objects / constructors / factory + module pattern
-- [ ] Project: Library
-- [ ] Project: Tic Tac Toe
-- [ ] Classes · ES6 modules · npm · Webpack
-- [ ] Project: Restaurant Page
-- [ ] JSON · OOP principles
-- [ ] Project: Todo List
-- [ ] Linting · Form Validation · ECMAScript
-- [ ] **Async · APIs · async/await**  *(baseline first)*
-- [ ] Project: Weather App  *(the async boss project)*
-- [ ] Testing basics  *(light)*
-- [ ] Project: Battleship
-- [ ] Intermediate Git  *(light)*
-- ~~A Bit of Computer Science (DSA block)~~  **SKIP -- you have A's**
+```
+JavaScript -> YOUR WAY. Watch a 12hr course (~4 days incl. practice), then
+              build self-chosen projects. I curate the project set to FORCE
+              full concept coverage (no blind spots). Baseline first on the
+              5 JS-native concepts: async/event-loop, closures, this,
+              prototypes, the DOM.
+React      -> mostly self-directed; react.dev for the hard parts; self-chosen
+              projects. SKIM class components (legacy).
+Node       -> LEAN ON TOP'S STRUCTURE (backend has more to miss). Do the
+              projects through Odin-Book.
+Databases  -> SKIP. SQL Zoo refresher only (you know SQL from CSC365).
+Docs       -> on-demand. Skip by default; read only when a topic SPAWNS
+              unknowns instead of landing. Tutor (Claude) for gaps.
+```
 
-## Stage 2 -- React  (~22hr / ~1.5 wks)
-- [ ] Components · JSX · props · rendering · keys
-- [ ] State · useEffect
-- [ ] Project: CV Application
-- [ ] Project: Memory Card
-- [ ] React Router · Fetching Data · Styling
-- [ ] Project: Shopping Cart
-- ~~Class Components + Lifecycle~~  **SKIM ONLY (legacy -- read-old-code level)**
-- *Defer:* Testing · Context · useReducer · Refs/Memo (until a project needs them)
+---
 
-## Stage 3 -- Node + Express + Postgres  (~60hr / ~3.5-4 wks)  ⭐ crown jewel
-- [ ] Node basics · debugging · env vars
-- [ ] Project: Basic Informational Site
-- [ ] Express · routes · controllers
-- [ ] Project: Mini Message Board
-- [ ] Deployment · Forms & Data Handling
-- [ ] PostgreSQL (install + use)
-- [ ] Project: Inventory Application
-- [ ] Authentication basics
-- [ ] Project: Members Only
-- [ ] Prisma ORM
-- [ ] Project: File Uploader
-- [ ] API Basics · API Security
-- [ ] Project: Blog API
-- [ ] Project: Where's Waldo (photo tagging)
-- [ ] Project: Messaging App
-- [ ] **FINAL: Odin-Book**  *(the portfolio centerpiece)*
-- *Skim:* server-side Views (you're doing React frontend + JSON API)
-- *Light:* Testing Express
+## ✅ STAGE 0 -- Admin Dashboard (now)
+- [ ] Admin Dashboard project shipped  *(finishes Intermediate HTML/CSS)*
 
-## Stage 4 -- Databases  (~3hr / <1 day)
-- [ ] Project: SQL Zoo  *(refresher only -- you know SQL from CSC365)*
+## P1 -- JavaScript (~2.5 wks)
+- [ ] Watch 12hr JS course + per-topic exercises (~4 days)
+- [ ] Baseline: async / closures / this / prototypes / DOM  *(don't osmosis these)*
+- [ ] Project 1 (DOM + events)        *(I'll curate for coverage)*
+- [ ] Project 2 (objects + data + .map/.filter)
+- [ ] Project 3 (async + API + fetch)  *(the boss project)*
+- [ ] (optional) Project 4 -- something portfolio-worthy you want
+
+## P2 -- React (~1.5 wks)
+- [ ] Components / JSX / props / state / useEffect / keys / router / fetching
+- [ ] Project: self-chosen React app (CRUD + API)
+- ~~Class components~~  SKIM only (legacy)
+
+## P3 -- Node + Postgres (~4 wks) ⭐
+- [ ] Express (routes / controllers / middleware)
+- [ ] PostgreSQL + Prisma ORM
+- [ ] Authentication (hashing / JWT or sessions)
+- [ ] APIs (REST + security)
+- [ ] Deployment (frontend + backend + DB live)
+- [ ] **FINAL: Odin-Book**  *(portfolio centerpiece)*
+- *Skim:* server-side Views · *Light:* testing
+
+## 🔁 PARALLEL -- DSA (every day, separate 40min)
+- [ ] ~3-4 LeetCode/week in Java (interview gate)
 
 ---
 
 ## 🔖 Bookmarked for later (skip now)
-- Advanced HTML & CSS course (responsive deep-dive, animations) -- revisit if a project needs it
-- TypeScript -- add types to a project after first ship
-- Next.js -- SSR / the startup default, after React is solid
-- Comprehensive testing (Jest/Vitest), Docker/CI-CD -- learn on the job
-- Getting Hired (TOP) -- during application season
+Advanced HTML & CSS · TypeScript · Next.js · comprehensive testing · Docker/CI-CD · Getting Hired
+
+📚 Live lessons + reviews: https://kdlin.github.io/the-odin-project/notes/teach/lessons/0003-fullstack-roadmap.html
