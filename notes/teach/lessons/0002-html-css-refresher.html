@@ -67,6 +67,32 @@
     Always write <code>alt</code> on images &mdash; it's read by screen readers and shows if the image fails. Empty <code>alt=""</code> is correct only for purely decorative images.
   </div>
 
+  <h2 class="reveal">3b. Forms (you'll need these for React) <span class="time">&#x23F1; 2 min</span></h2>
+  <pre><code>&lt;form&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input type="email" id="email" name="email" placeholder="you@x.com" required&gt;
+
+  &lt;label for="msg"&gt;Message&lt;/label&gt;
+  &lt;textarea id="msg" name="msg"&gt;&lt;/textarea&gt;
+
+  &lt;select name="plan"&gt;
+    &lt;option value="free"&gt;Free&lt;/option&gt;
+    &lt;option value="pro"&gt;Pro&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;button type="submit"&gt;Send&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+  <div class="insight">
+    <span class="tag">Why forms matter now</span>
+    Every app with users has forms (login, search, create). In React you'll wire each <code>input</code>'s <code>value</code> + <code>onChange</code> to state ("controlled components"). Knowing the raw HTML -- <code>input</code> types, <code>label for</code>/<code>id</code> pairing, <code>name</code>, <code>textarea</code>, <code>select</code> -- makes that click instead of confuse.
+  </div>
+  <div class="trap">
+    <span class="tag">Form gotchas</span>
+    &bull; <code>&lt;label for="x"&gt;</code> must match the input's <code>id="x"</code> -- clicking the label then focuses the field (accessibility + UX).<br>
+    &bull; A <code>&lt;button&gt;</code> inside a <code>&lt;form&gt;</code> defaults to <code>type="submit"</code> and reloads the page -- in JS/React you'll call <code>e.preventDefault()</code> to stop that.<br>
+    &bull; <code>name</code> is what gets submitted/read, not <code>id</code>. <code>id</code> is for the label + CSS/JS hooks.
+  </div>
+
   <!-- ============ CSS BASICS ============ -->
   <h2 class="reveal">4. Selectors <span class="time">&#x23F1; 2 min</span></h2>
   <pre><code>.class      { }   /* class      - reusable, your default */
