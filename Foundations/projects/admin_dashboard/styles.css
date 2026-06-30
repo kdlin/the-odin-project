@@ -1,0 +1,42 @@
+/*==== Reset====*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==== Variables ==== */
+:root {
+  --color-sidebar: #000; 
+  --color-bg: #000;
+  --gap: 1.5rem; 
+}
+
+/* ==== Layout ==== */
+.container {
+  display: grid;
+  grid-template: 
+    "sidebar header" auto 
+    "sidebar main" 1fr / 1fr 3fr; 
+  gap: var(--gap);
+  min-height: 100vh;
+}
+
+
+.sidebar, header, main { 
+  border : 2px solid red; 
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+header { 
+  grid-area: header;
+}
+
+main {
+  grid-area: main;
+}
