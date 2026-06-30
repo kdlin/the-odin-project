@@ -28,7 +28,9 @@ main {
   display: grid;
   grid-template: 
     "projects announcements" auto 
-    "projects trending" auto / 2fr 1fr
+    "projects trending" auto / 2fr 1fr;
+  grid-area: main;
+  gap: var(--gap);
 }
 
 /* TEMP STYLING */
