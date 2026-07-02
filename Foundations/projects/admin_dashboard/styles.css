@@ -46,13 +46,28 @@ header {
   grid-area: header;
 }
 
+
 .top-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  gap: var(--gap);
+  padding: var(--gap);
+}
+
+.search {
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: var(--gap);
 }
 
+.account-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: var(--gap);
+}
 
 .projects,.announcements, .trending {
   border: 1px solid blue; 
