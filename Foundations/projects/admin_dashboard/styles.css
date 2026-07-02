@@ -46,6 +46,13 @@ header {
   grid-area: header;
 }
 
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: var(--gap);
+}
+
 
 .projects,.announcements, .trending {
   border: 1px solid blue; 
