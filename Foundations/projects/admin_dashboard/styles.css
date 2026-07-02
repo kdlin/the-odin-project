@@ -49,24 +49,22 @@ header {
 
 .top-bar {
   display: flex;
-  flex-direction: row;
   justify-content:space-between;
+  align-items: center;
   gap: var(--gap);
   padding: var(--gap);
 }
 
 .search {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  align-items: center;
   gap: var(--gap);
 }
 
 .account-group {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   gap: var(--gap);
+  align-items: center;
 }
 
 .projects,.announcements, .trending {
