@@ -47,7 +47,7 @@ header {
 }
 
 
-.top-bar {
+.top-bar, .welcome-bar {
   display: flex;
   justify-content:space-between;
   align-items: center;
@@ -55,17 +55,25 @@ header {
   padding: var(--gap);
 }
 
-.search {
+.search, .account-group, .greeting, .actions {
   display: flex;
   align-items: center;
   gap: var(--gap);
 }
 
-.account-group {
+.stacked-welcome {
   display: flex;
-  gap: var(--gap);
-  align-items: center;
+  flex-direction: column;
+  gap: 8px;
 }
+
+.actions > button { 
+  padding: 16px 32px;
+  border-radius: 32px;
+  border: 1px solid black;
+}
+
+
 
 .projects,.announcements, .trending {
   border: 1px solid blue; 
